@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useId } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
@@ -14,6 +14,7 @@ function getSessionId() {
   let sessionId = localStorage.getItem("airtel-chatbot-session-id");
   if (!sessionId) {
     sessionId = crypto.randomUUID();
+    // sessionId = "1234567890";
     localStorage.setItem("airtel-chatbot-session-id", sessionId);
   }
   return sessionId;
@@ -55,8 +56,9 @@ export default function Chat() {
         ...prev,
         { role: "assistant", content: data.answer || data.response || "No response." },
       ]);
-    } catch (err: any) {
-      setHasError(err.message || "Unknown error");
+    } catch (err) {
+      const error = err as Error;
+      setHasError(error.message || "Unknown error");
     } finally {
       setIsLoading(false);
     }
