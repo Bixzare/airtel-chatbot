@@ -10,10 +10,11 @@ export async function POST(req: NextRequest) {
     });
     const data = await backendRes.json();
     return NextResponse.json(data, { status: backendRes.status });
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as Error;
     return NextResponse.json(
-      { error: error.message || "Internal server error" },
+      { error: err.message || "Internal server error" },
       { status: 500 }
     );
   }
-} 
+}
