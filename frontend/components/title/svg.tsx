@@ -13,7 +13,7 @@ export const AirtelSymbol: React.FC<SvgProps> = ({ className, color }) => {
     color || (theme === "dark" ? "#ffffff" : "#E31F26")
   );
   React.useEffect(() => {
-    setSvgColor(color || (theme === "dark" ? "#ffffff" : "#E31F26"));
+    setSvgColor((theme === "dark" ? "#ffffff" : "#E31F26"));
   }, [theme]);
   return (
     <svg
@@ -35,7 +35,7 @@ export const AirtelText: React.FC<SvgProps> = ({ className, color }) => {
     color || (theme === "dark" ? "#ffffff" : "#E31F26")
   );
   React.useEffect(() => {
-    setSvgColor(color || (theme === "dark" ? "#ffffff" : "#E31F26"));
+    setSvgColor((theme === "dark" ? "#ffffff" : "#E31F26"));
   }, [theme]);
   return (
     <svg

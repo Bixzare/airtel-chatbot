@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useId } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
