@@ -1,7 +1,7 @@
 # How to run
 
 ```
-python -m uvicorn src.api.main:app --reload
+python -m uvicorn src.api.main:app
 
 ```
 
