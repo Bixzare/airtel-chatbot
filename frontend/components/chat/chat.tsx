@@ -14,6 +14,7 @@ function getSessionId() {
   let sessionId = localStorage.getItem("airtel-chatbot-session-id");
   if (!sessionId) {
     sessionId = crypto.randomUUID();
+    // sessionId = "1234567890";
     localStorage.setItem("airtel-chatbot-session-id", sessionId);
   }
   return sessionId;
