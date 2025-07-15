@@ -14,4 +14,4 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     # Use 0.0.0.0 for production deployment
     host = "0.0.0.0" if os.environ.get("VERCEL") else "127.0.0.1"
-    uvicorn.run(app, host=host, port=port, reload=False) 
+    uvicorn.run(app, host=host, port=port, reload=False)
