@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { v4 as uuidv4 } from "uuid";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,7 +14,8 @@ function getSessionId() {
   if (typeof window === "undefined") return "";
   let sessionId = localStorage.getItem("airtel-chatbot-session-id");
   if (!sessionId) {
-    sessionId = crypto.randomUUID();
+    sessionId = uuidv4();
+    // sessionId = crypto.randomUUID();
     // sessionId = "1234567890";
     localStorage.setItem("airtel-chatbot-session-id", sessionId);
   }
