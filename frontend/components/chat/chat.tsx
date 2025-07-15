@@ -182,7 +182,7 @@ export default function Chat() {
       >
         <input
           type="text"
-          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "text-red-600" : "text-white" }`}
+          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "text-black" : "text-white" }`}
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
