@@ -136,7 +136,7 @@ export default function Chat() {
       </div>
       {/* Error message */}
       {hasError && (
-        <div className="w-full text-center text-xs text-red-600 mb-2">{hasError}</div>
+        <div className={`w-full text-center text-xs mb-2 ${ theme === "dark" ? "text-red-600" : "text-white" }`}>{hasError}</div>
       )}
       {/* Input area */}
       <form
@@ -148,7 +148,7 @@ export default function Chat() {
       >
         <input
           type="text"
-          className="flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] text-black"
+          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ theme === "dark" ? "text-red-600" : "text-white" }`}
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
