@@ -2,16 +2,16 @@
 FastAPI endpoint for LangGraph RAG agent.
 """
 
+import uvicorn
+import os
+from typing import Dict
+from langchain_core.messages import HumanMessage
+from src.agent.rag_agent import LangGraphRAGAgent
+from pydantic import BaseModel
+from fastapi import FastAPI
 from dotenv import load_dotenv
 load_dotenv()
 
-from fastapi import FastAPI, Request
-from pydantic import BaseModel
-from src.agent.rag_agent import LangGraphRAGAgent
-from langchain_core.messages import HumanMessage
-from typing import Dict
-import uvicorn 
-import os
 
 app = FastAPI()
 
@@ -19,14 +19,17 @@ app = FastAPI()
 session_histories: Dict[str, list] = {}
 agent = LangGraphRAGAgent('src/rag/static_document.txt')
 
+
 class ChatRequest(BaseModel):
     session_id: str
     message: str
+
 
 @app.get("/")
 async def root():
     """Health check endpoint for Vercel"""
     return {"status": "ok", "message": "Airtel RAG Agent API is running"}
+
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
@@ -35,9 +38,10 @@ async def chat_endpoint(request: ChatRequest):
     # Get or create message history for this session
     messages = session_histories.get(session_id, [])
     messages.append(HumanMessage(content=user_message))
-    response, updated_messages = agent.invoke_with_memory(messages, thread_id=session_id)
+    response, updated_messages = agent.invoke_with_memory(
+        messages, thread_id=session_id)
     session_histories[session_id] = updated_messages
-    return {"response": response} 
+    return {"response": response}
 
 
 if __name__ == "__main__":
