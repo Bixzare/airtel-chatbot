@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { getInitialTheme } from "@/lib/utils";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,13 +22,28 @@ function getSessionId() {
 }
 
 export default function Chat() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [sessionId, setSessionId] = useState<string>("");
+
+  // Set initial theme based on localStorage or system preference
+  useEffect(() => {
+    setCurrentTheme(getInitialTheme());
+    setMounted(true);
+  }, []);
+
+  // Update theme when resolvedTheme changes
+  useEffect(() => {
+    if (resolvedTheme && (resolvedTheme === 'light' || resolvedTheme === 'dark')) {
+      setCurrentTheme(resolvedTheme);
+    }
+  }, [resolvedTheme]);
 
   useEffect(() => {
     setSessionId(getSessionId());
@@ -71,10 +87,28 @@ export default function Chat() {
     }
   };
 
+  // Use the skeleton loader only for a very brief moment during initial load
+  if (!mounted) {
+    return (
+      <div className="flex flex-col w-full max-w-2xl h-[32rem] rounded-xl items-center justify-between bg-gray-200 shadow-lg p-4 animate-pulse">
+        {/* Skeleton loader */}
+        <div className="flex-1 w-full flex flex-col space-y-4 py-4">
+          <div className="w-3/4 h-8 bg-gray-300 rounded-lg self-start"></div>
+          <div className="w-2/3 h-8 bg-gray-300 rounded-lg self-end"></div>
+          <div className="w-3/4 h-8 bg-gray-300 rounded-lg self-start"></div>
+        </div>
+        <div className="w-full flex gap-2 items-center">
+          <div className="flex-1 h-10 bg-gray-300 rounded-md"></div>
+          <div className="h-10 w-16 bg-gray-300 rounded-md"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`flex flex-col w-full max-w-2xl h-[32rem] rounded-xl items-center justify-between ${
-        theme === "dark"
+        currentTheme === "dark"
           ? "bg-white text-[#E31F26]"
           : "bg-[#E31F26] text-white"
       } shadow-lg p-4 transition-colors duration-300`}
@@ -101,10 +135,10 @@ export default function Chat() {
             <div
               className={`rounded-lg px-4 py-2 max-w-[80%] break-words text-sm shadow-md ${
                 msg.role === "user"
-                  ? theme === "dark"
+                  ? currentTheme === "dark"
                     ? "bg-[#E31F26] text-white"
                     : "bg-white text-[#E31F26]"
-                  : theme === "dark"
+                  : currentTheme === "dark"
                   ? "bg-gray-100 text-[#E31F26]"
                   : "bg-[#fff7f7] text-[#E31F26]"
               }`}
@@ -118,7 +152,7 @@ export default function Chat() {
           <div className="flex w-full justify-start">
             <div
               className={`rounded-lg px-4 py-2 max-w-[80%] shadow-md ${
-                theme === "dark"
+                currentTheme === "dark"
                   ? "bg-gray-100 text-[#E31F26]"
                   : "bg-[#fff7f7] text-[#E31F26]"
               }`}

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useTheme } from "next-themes";
+import { getInitialTheme } from "@/lib/utils";
 
 export interface SvgProps {
   className?: string;
@@ -8,13 +9,26 @@ export interface SvgProps {
 }
 
 export const AirtelSymbol: React.FC<SvgProps> = ({ className, color }) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
   const [svgColor, setSvgColor] = React.useState<string>(
-    color || (theme === "dark" ? "#ffffff" : "#E31F26")
+    color || "#E31F26" // Default to light theme color
   );
+
+  // Set initial theme based on localStorage or system preference
   React.useEffect(() => {
-    setSvgColor((theme === "dark" ? "#ffffff" : "#E31F26"));
-  }, [theme]);
+    const initialTheme = getInitialTheme();
+    setSvgColor(color || (initialTheme === "dark" ? "#ffffff" : "#E31F26"));
+    setMounted(true);
+  }, [color]);
+
+  // Update theme when resolvedTheme changes
+  React.useEffect(() => {
+    if (mounted && resolvedTheme) {
+      setSvgColor(color || (resolvedTheme === "dark" ? "#ffffff" : "#E31F26"));
+    }
+  }, [resolvedTheme, mounted, color]);
+
   return (
     <svg
       viewBox="0 0 120 80"
@@ -30,13 +44,26 @@ export const AirtelSymbol: React.FC<SvgProps> = ({ className, color }) => {
 };
 
 export const AirtelText: React.FC<SvgProps> = ({ className, color }) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
   const [svgColor, setSvgColor] = React.useState<string>(
-    color || (theme === "dark" ? "#ffffff" : "#E31F26")
+    color || "#E31F26" // Default to light theme color
   );
+
+  // Set initial theme based on localStorage or system preference
   React.useEffect(() => {
-    setSvgColor((theme === "dark" ? "#ffffff" : "#E31F26"));
-  }, [theme]);
+    const initialTheme = getInitialTheme();
+    setSvgColor(color || (initialTheme === "dark" ? "#ffffff" : "#E31F26"));
+    setMounted(true);
+  }, [color]);
+
+  // Update theme when resolvedTheme changes
+  React.useEffect(() => {
+    if (mounted && resolvedTheme) {
+      setSvgColor(color || (resolvedTheme === "dark" ? "#ffffff" : "#E31F26"));
+    }
+  }, [resolvedTheme, mounted, color]);
+
   return (
     <svg
       viewBox="0 80 120 50"
