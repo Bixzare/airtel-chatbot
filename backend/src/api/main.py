@@ -2,6 +2,10 @@
 FastAPI endpoint for LangGraph RAG agent.
 """
 
+import logging
+from typing import List
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi import HTTPException
 import uvicorn
 import os
 from typing import Dict
@@ -12,18 +16,10 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 load_dotenv()
 
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from src.agent.rag_agent import LangGraphRAGAgent
-from langchain_core.messages import HumanMessage
-from typing import Dict, List, Optional
-import uvicorn 
-import os
-import logging
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Airtel RAG Agent API")
@@ -50,7 +46,7 @@ class ChatRequest(BaseModel):
     session_id: str
     message: str
 
-      
+
 class ChatResponse(BaseModel):
     response: str
     session_id: str
@@ -62,26 +58,14 @@ async def root():
     return {"status": "ok", "message": "Airtel RAG Agent API is running"}
 
 
-@app.post("/chat")
-async def chat_endpoint(request: ChatRequest):
-    session_id = request.session_id
-    user_message = request.message
-    # Get or create message history for this session
-    messages = session_histories.get(session_id, [])
-    messages.append(HumanMessage(content=user_message))
-    response, updated_messages = agent.invoke_with_memory(
-        messages, thread_id=session_id)
-    session_histories[session_id] = updated_messages
-    return {"response": response}
-
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
     """
     Chat endpoint for the RAG agent.
-    
+
     Args:
         request: ChatRequest with session_id and message
-        
+
     Returns:
         ChatResponse with the agent's response
     """
@@ -89,33 +73,36 @@ async def chat_endpoint(request: ChatRequest):
         session_id = request.session_id
         user_message = request.message
         logger.info(f"Received chat request for session {session_id}")
-        
+
         # Get or create message history for this session
         messages = session_histories.get(session_id, [])
         messages.append(HumanMessage(content=user_message))
-        
+
         # Invoke agent with memory
-        response, updated_messages = agent.invoke_with_memory(messages, thread_id=session_id)
-        
+        response, updated_messages = agent.invoke_with_memory(
+            messages, thread_id=session_id)
+
         # Update session history
         session_histories[session_id] = updated_messages
-        
-        logger.info(f"Successfully processed chat request for session {session_id}")
+
+        logger.info(
+            f"Successfully processed chat request for session {session_id}")
         return {"response": response, "session_id": session_id}
-    
+
     except Exception as e:
         logger.error(f"Error processing chat request: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error processing request: {str(e)}")
 
 
 @app.delete("/chat/{session_id}")
 async def clear_session(session_id: str):
     """
     Clear the message history for a session.
-    
+
     Args:
         session_id: The session ID to clear
-        
+
     Returns:
         Success message
     """
