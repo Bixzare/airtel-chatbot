@@ -3,6 +3,7 @@ Main LangGraph RAG agent implementation.
 """
 
 from src.tools.rag_tool import RAGTool
+from src.tools.placeholder_tools import CalculatorTool, SummarizerTool
 from src.agent.agent_state import AgentState
 from src.memory.checkpointer import Checkpointer
 from src.prompts.system_prompt import AIRTEL_NIGER_SYSTEM_PROMPT
@@ -12,6 +13,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import time
 import logging
+import re
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -28,7 +30,6 @@ class LangGraphRAGAgent:
             model_name: Name of the Google Generative AI model to use
         """
         logger.info(f"Initializing RAG agent with document: {document_path}")
-        self.rag_tool = RAGTool(document_path)
         
         # Initialize LLM
         self.llm = ChatGoogleGenerativeAI(
@@ -40,12 +41,52 @@ class LangGraphRAGAgent:
             timeout=30  # 30 second timeout
         )
         
+        # Initialize tools
+        self.rag_tool = RAGTool(document_path)
+        self.calculator_tool = CalculatorTool()
+        self.summarizer_tool = SummarizerTool(llm=self.llm)
+        
         # Initialize memory
         self.checkpointer = Checkpointer()
         
         # Build workflow
         self.workflow = self._build_workflow()
         logger.info("RAG agent initialized successfully")
+
+    def _detect_tool_calls(self, query: str):
+        """
+        Detect which tool to use based on the query.
+        
+        Args:
+            query: User query
+            
+        Returns:
+            Tuple of (tool_name, tool_input)
+        """
+        # Check for calculation requests
+        calc_patterns = [
+            r'calculate\s+([\d\+\-\*\/\(\)\.\s]+)',
+            r'compute\s+([\d\+\-\*\/\(\)\.\s]+)',
+            r'what is\s+([\d\+\-\*\/\(\)\.\s]+)',
+            r'([\d]+\s*[\+\-\*\/]\s*[\d]+)'
+        ]
+        
+        for pattern in calc_patterns:
+            match = re.search(pattern, query.lower())
+            if match:
+                return "calculator", match.group(1)
+        
+        # Check for summarization requests
+        if any(keyword in query.lower() for keyword in ["summarize", "summary", "summarization", "key points"]):
+            # Extract text to summarize - assume it's the rest of the query after the keyword
+            for keyword in ["summarize", "summary", "summarization", "key points"]:
+                if keyword in query.lower():
+                    parts = query.lower().split(keyword, 1)
+                    if len(parts) > 1:
+                        return "summarizer", parts[1].strip()
+        
+        # Default to RAG tool
+        return "rag", query
 
     def _build_workflow(self):
         """Build the LangGraph workflow."""
@@ -59,18 +100,32 @@ class LangGraphRAGAgent:
                     user_message = state["messages"][-1].content
                     logger.info(f"Processing query: {user_message}")
                     
-                    # Call RAG tool
-                    docs = self.rag_tool(user_message)
-                    if docs and docs[0] != "No specific information found in the knowledge base for this query.":
-                        logger.info(f"Retrieved {len(docs)} relevant document chunks")
-                        context = "\n\n".join([f"Document chunk {i+1}:\n{doc}" for i, doc in enumerate(docs)])
-                    else:
-                        logger.warning("No relevant documents found")
-                        context = "No specific information found in the knowledge base for this query."
+                    # Detect which tool to use
+                    tool_name, tool_input = self._detect_tool_calls(user_message)
+                    logger.info(f"Selected tool: {tool_name}")
+                    
+                    # Call appropriate tool
+                    if tool_name == "calculator":
+                        tool_result = self.calculator_tool(tool_input)
+                        context = f"Calculator result: {tool_result}"
+                        logger.info(f"Calculator result: {tool_result}")
+                    elif tool_name == "summarizer":
+                        tool_result = self.summarizer_tool(tool_input)
+                        context = f"Summary points:\n" + "\n".join([f"- {point}" for point in tool_result])
+                        logger.info(f"Summarizer result: {len(tool_result)} points")
+                    else:  # Default to RAG
+                        docs = self.rag_tool(user_message)
+                        if docs and docs[0] != "No specific information found in the knowledge base for this query.":
+                            logger.info(f"Retrieved {len(docs)} relevant document chunks")
+                            context = "\n\n".join([f"Document chunk {i+1}:\n{doc}" for i, doc in enumerate(docs)])
+                        else:
+                            logger.warning("No relevant documents found")
+                            context = "No specific information found in the knowledge base for this query."
+                        tool_result = docs
                     
                     # Prepare system prompt with context
                     system_prompt = AIRTEL_NIGER_SYSTEM_PROMPT
-                    context_message = SystemMessage(content=f"{system_prompt}\n\nRelevant Documentation:\n{context}")
+                    context_message = SystemMessage(content=f"{system_prompt}\n\nRelevant Information:\n{context}")
                     
                     # Pass full conversation history to LLM
                     llm_messages = [context_message] + state["messages"]
@@ -80,9 +135,9 @@ class LangGraphRAGAgent:
                     # Update state
                     return {
                         "messages": state["messages"] + [AIMessage(content=response.content)],
-                        "retrieved_docs": docs,
+                        "retrieved_docs": tool_result if tool_name == "rag" else state["retrieved_docs"],
                         "current_query": user_message,
-                        "tool_calls": state["tool_calls"] + [{"tool": "rag_search", "result": docs}]
+                        "tool_calls": state["tool_calls"] + [{"tool": tool_name, "result": tool_result}]
                     }
                 except Exception as e:
                     logger.error(f"Error in agent node (attempt {attempt+1}/{max_retries}): {str(e)}")
