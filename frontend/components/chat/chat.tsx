@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { v4 as uuidv4 } from "uuid";
 import { getInitialTheme } from "@/lib/utils";
 
 interface Message {
@@ -14,7 +15,8 @@ function getSessionId() {
   if (typeof window === "undefined") return "";
   let sessionId = localStorage.getItem("airtel-chatbot-session-id");
   if (!sessionId) {
-    sessionId = crypto.randomUUID();
+    sessionId = uuidv4();
+    // sessionId = crypto.randomUUID();
     // sessionId = "1234567890";
     localStorage.setItem("airtel-chatbot-session-id", sessionId);
   }
@@ -168,7 +170,7 @@ export default function Chat() {
       </div>
       {/* Error message */}
       {hasError && (
-        <div className="w-full text-center text-xs text-red-600 mb-2">{hasError}</div>
+        <div className={`w-full text-center text-xs mb-2 ${ currentTheme === "dark" ? "text-red-600" : "text-white" }`}>{hasError}</div>
       )}
       {/* Input area */}
       <form
@@ -180,7 +182,7 @@ export default function Chat() {
       >
         <input
           type="text"
-          className="flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] text-black"
+          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "text-black" : "text-white" }`}
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}

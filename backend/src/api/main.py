@@ -2,6 +2,13 @@
 FastAPI endpoint for LangGraph RAG agent.
 """
 
+import uvicorn
+import os
+from typing import Dict
+from langchain_core.messages import HumanMessage
+from src.agent.rag_agent import LangGraphRAGAgent
+from pydantic import BaseModel
+from fastapi import FastAPI
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -38,18 +45,34 @@ document_path = os.environ.get("DOCUMENT_PATH", "src/rag/static_document.txt")
 model_name = os.environ.get("MODEL_NAME", "gemini-1.5-flash")
 agent = LangGraphRAGAgent(document_path, model_name)
 
+
 class ChatRequest(BaseModel):
     session_id: str
     message: str
 
+      
 class ChatResponse(BaseModel):
     response: str
     session_id: str
+
 
 @app.get("/")
 async def root():
     """Health check endpoint for Vercel"""
     return {"status": "ok", "message": "Airtel RAG Agent API is running"}
+
+
+@app.post("/chat")
+async def chat_endpoint(request: ChatRequest):
+    session_id = request.session_id
+    user_message = request.message
+    # Get or create message history for this session
+    messages = session_histories.get(session_id, [])
+    messages.append(HumanMessage(content=user_message))
+    response, updated_messages = agent.invoke_with_memory(
+        messages, thread_id=session_id)
+    session_histories[session_id] = updated_messages
+    return {"response": response}
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -83,6 +106,7 @@ async def chat_endpoint(request: ChatRequest):
     except Exception as e:
         logger.error(f"Error processing chat request: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
+
 
 @app.delete("/chat/{session_id}")
 async def clear_session(session_id: str):
