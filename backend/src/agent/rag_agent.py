@@ -11,22 +11,44 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import time
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class LangGraphRAGAgent:
     """LangGraph-based RAG agent with memory, RAG tool, and LLM node."""
-    def __init__(self, document_path: str):
-        with open(document_path, 'r', encoding='utf-8') as f:
-            doc = f.read()
-        self.rag_tool = RAGTool(doc)
+    def __init__(self, document_path: str, model_name: str = "gemini-1.5-flash"):
+        """
+        Initialize the RAG agent with document path and model.
+        
+        Args:
+            document_path: Path to the knowledge base document
+            model_name: Name of the Google Generative AI model to use
+        """
+        logger.info(f"Initializing RAG agent with document: {document_path}")
+        self.rag_tool = RAGTool(document_path)
+        
+        # Initialize LLM
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
-            google_api_key=os.environ["GOOGLE_API_KEY"],
+            model=model_name,
+            google_api_key=os.environ.get("GOOGLE_API_KEY"),
+            temperature=0.2,  # Lower temperature for more factual responses
+            top_p=0.9,
+            top_k=40,
             timeout=30  # 30 second timeout
         )
+        
+        # Initialize memory
         self.checkpointer = Checkpointer()
+        
+        # Build workflow
         self.workflow = self._build_workflow()
+        logger.info("RAG agent initialized successfully")
 
     def _build_workflow(self):
+        """Build the LangGraph workflow."""
         workflow = StateGraph(state_schema=AgentState)
 
         def agent_node(state: AgentState):
@@ -35,10 +57,16 @@ class LangGraphRAGAgent:
                 try:
                     # Get the latest user message
                     user_message = state["messages"][-1].content
+                    logger.info(f"Processing query: {user_message}")
                     
                     # Call RAG tool
                     docs = self.rag_tool(user_message)
-                    context = "\n".join(docs) or "No specific information found in the knowledge base for this query."
+                    if docs and docs[0] != "No specific information found in the knowledge base for this query.":
+                        logger.info(f"Retrieved {len(docs)} relevant document chunks")
+                        context = "\n\n".join([f"Document chunk {i+1}:\n{doc}" for i, doc in enumerate(docs)])
+                    else:
+                        logger.warning("No relevant documents found")
+                        context = "No specific information found in the knowledge base for this query."
                     
                     # Prepare system prompt with context
                     system_prompt = AIRTEL_NIGER_SYSTEM_PROMPT
@@ -46,8 +74,10 @@ class LangGraphRAGAgent:
                     
                     # Pass full conversation history to LLM
                     llm_messages = [context_message] + state["messages"]
+                    logger.info("Calling LLM for response")
                     response = self.llm.invoke(llm_messages)
                     
+                    # Update state
                     return {
                         "messages": state["messages"] + [AIMessage(content=response.content)],
                         "retrieved_docs": docs,
@@ -55,12 +85,15 @@ class LangGraphRAGAgent:
                         "tool_calls": state["tool_calls"] + [{"tool": "rag_search", "result": docs}]
                     }
                 except Exception as e:
+                    logger.error(f"Error in agent node (attempt {attempt+1}/{max_retries}): {str(e)}")
                     if attempt < max_retries - 1:
                         wait_time = 2 ** attempt
+                        logger.info(f"Retrying in {wait_time} seconds...")
                         time.sleep(wait_time)
                         continue
                     else:
                         fallback_response = "I'm experiencing technical difficulties. Please try again in a moment or contact Airtel customer service for immediate assistance."
+                        logger.error(f"Max retries reached, returning fallback response")
                         return {
                             "messages": state["messages"] + [AIMessage(content=fallback_response)],
                             "retrieved_docs": state["retrieved_docs"],
@@ -68,11 +101,25 @@ class LangGraphRAGAgent:
                             "tool_calls": state["tool_calls"]
                         }
 
+        # Add node and edge
         workflow.add_node("agent", agent_node)
         workflow.add_edge(START, "agent")
+        
+        # Compile workflow with checkpointer
         return workflow.compile(checkpointer=self.checkpointer.get_memory())
 
     def invoke(self, query: str, thread_id: str = "default"):
+        """
+        Invoke the agent with a single query.
+        
+        Args:
+            query: User query
+            thread_id: Thread ID for conversation memory
+            
+        Returns:
+            Agent response text
+        """
+        logger.info(f"Invoking agent with query: {query} (thread: {thread_id})")
         state = {
             "messages": [HumanMessage(content=query)],
             "retrieved_docs": [],
@@ -84,8 +131,18 @@ class LangGraphRAGAgent:
         return result["messages"][-1].content
 
     def invoke_with_memory(self, messages, thread_id: str = "default"):
-        """Invoke the agent with a full message history, returning the response and updated messages."""
+        """
+        Invoke the agent with a full message history.
+        
+        Args:
+            messages: List of message objects
+            thread_id: Thread ID for conversation memory
+            
+        Returns:
+            Tuple of (response text, updated messages)
+        """
         query = messages[-1].content if messages else ""
+        logger.info(f"Invoking agent with message history (thread: {thread_id})")
         state = {
             "messages": messages,
             "retrieved_docs": [],
@@ -95,8 +152,4 @@ class LangGraphRAGAgent:
         config = {"configurable": {"thread_id": thread_id}}
         result = self.workflow.invoke(state, config)
         updated_messages = result["messages"]
-        return result["messages"][-1].content, updated_messages
-
-# Example usage:
-# agent = LangGraphRAGAgent('src/rag/static_document.txt')
-# print(agent.invoke('remote work')) 
+        return result["messages"][-1].content, updated_messages 
