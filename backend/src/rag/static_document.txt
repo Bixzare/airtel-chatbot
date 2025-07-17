@@ -4,34 +4,67 @@ Airtel Niger Services and Information
 Mobile Services:
 Airtel Niger provides comprehensive mobile telecommunications services including voice calls, SMS, and data services. Our network covers major cities and towns across Niger.
 
-Data Plans:
-- Daily Data: 50MB for 24 hours at 100 FCFA
-- Weekly Data: 500MB for 7 days at 500 FCFA  
-- Monthly Data: 2GB for 30 days at 2000 FCFA
-- Unlimited Night Data: Available from 11PM to 6AM
+Unlimited Plans:
+Airtel offers the best unlimited plans with unlimited calls and SMS to Airtel network, minutes to other Niger networks, and data for browsing on Niger's best internet connection:
+- 500 FCFA (24H): Unlimited calls to Airtel, 10 minutes to all networks, 100 MB data - Code: *141*2#
+- 1000 FCFA (48H): Unlimited calls to Airtel, 20 minutes to all networks, unlimited SMS to Airtel, 500 MB data - Code: *141*2#
+- 3000 FCFA (7 days): Unlimited calls to Airtel, 60 minutes to all networks, 2 GB data - Code: *141*2#
+- 5000 FCFA (7 days): Unlimited calls to Airtel, 120 minutes to all networks, unlimited SMS to Airtel, 3 GB data - Code: *141*2#
+- 10000 FCFA (30 days): 3000 minutes to Airtel, 100 minutes to all networks, unlimited SMS to Airtel, 4 GB data - Code: *141*1#
+- 20000 FCFA (30 days): Unlimited calls to Airtel, 300 minutes to all networks, unlimited SMS to Airtel, 12 GB data - Code: *141*2#
 
-Voice Services:
-- Local calls: 5 FCFA per minute
-- International calls: Rates vary by destination
-- Airtel to Airtel: 3 FCFA per minute
-- SMS: 10 FCFA per message
+Data Plans:
+- Hourly Data: 500MB for 1 hour at 200 FCFA
+- Hourly Data: 1GB for 1 hour at 350 FCFA
+- Daily Data: 25MB for 24 hours at 100 FCFA (100% bonus: +25MB for 24H when recharged on Mon/Wed/Fri)
+- Daily Data: 40MB for 24 hours at 150 FCFA (100% bonus: +40MB for 24H when recharged on Mon/Wed/Fri)
+- Daily Data: 75MB for 24 hours at 200 FCFA (100% bonus: +75MB for 24H when recharged on Mon/Wed/Fri)
+- Daily Data: 125MB for 24 hours at 300 FCFA (100% bonus: +125MB for 24H when recharged on Mon/Wed/Fri)
+- Daily Data: 600MB for 24 hours at 500 FCFA (100% bonus: +600MB for 24H when recharged on Mon/Wed/Fri)
+- Night Data: 200MB from 12AM to 5AM at 250 FCFA (100% bonus: +200MB for 5H when recharged on Mon/Wed/Fri)
+- Night Data: 1.2GB from 12AM to 5AM at 500 FCFA (100% bonus: +1.2GB for 5H when recharged on Mon/Wed/Fri)
+- Night Data: 5GB from 12AM to 5AM at 1000 FCFA (100% bonus: +5GB for 5H when recharged on Mon/Wed/Fri)
+- Night Data: 10GB from 12AM to 5AM at 1500 FCFA (100% bonus: +10GB for 5H when recharged on Mon/Wed/Fri)
+- Weekly Data: 400MB for 7 days at 500 FCFA (100% bonus: +400MB for 48H when recharged on Mon/Wed/Fri)
+- Weekly Data: 1GB for 7 days at 1000 FCFA (100% bonus: +1GB for 48H when recharged on Mon/Wed/Fri)
+- Weekly Data: 3GB for 7 days at 2000 FCFA (100% bonus: +3GB for 48H when recharged on Mon/Wed/Fri)
+- Weekly Data: 5GB for 7 days at 3000 FCFA (100% bonus: +5GB for 48H when recharged on Mon/Wed/Fri)
+All data plans can be activated using *141*3# and are currently active. Special 100% bonus data available when recharged on Mondays, Wednesdays, and Fridays with specific validity periods for the bonus portion.
+
+Voice Plans:
+- Daily Voice: 7 minutes to Airtel, 7 minutes to all networks for 24 hours at 50 FCFA - Code: *141*1*1#
+- Daily Voice: 15 minutes to Airtel, 15 minutes to all networks for 24 hours at 100 FCFA - Code: *141*1*1#
+- Daily Voice: 32 minutes to Airtel, 32 minutes to all networks for 24 hours at 200 FCFA - Code: *141*1*1#
+- 2-Day Voice: 50 minutes to Airtel, 50 minutes to all networks for 48 hours at 300 FCFA - Code: *141*1*1#
+- Daily Voice: Unlimited calls to Airtel, 10 minutes to all networks, 100 MB data for 24 hours at 500 FCFA - Code: *141*1*1#
+- 2-Day Voice: Unlimited calls to Airtel, 20 minutes to all networks, unlimited SMS to Airtel, 500 MB data for 48 hours at 1000 FCFA - Code: *141*2*1#
+- Weekly Voice: 75 minutes to Airtel, 75 minutes to all networks for 7 days at 500 FCFA - Code: *141*1*3#
+- Weekly Voice: 200 minutes to Airtel, 200 minutes to all networks for 7 days at 1000 FCFA - Code: *141*1*3#
+- Weekly Voice: 250 minutes to Airtel for 7 days at 1500 FCFA - Code: *141*1*3#
+- Weekly Voice: 105 minutes to Airtel, 30 minutes to all networks, 500 MB data for 7 days at 1500 FCFA - Code: *141*1*6#
+- Weekly Voice: Unlimited calls to Airtel, 60 minutes to all networks, 2 GB data for 7 days at 3000 FCFA - Code: *141*2*2#
+- Weekly Voice: Unlimited calls to Airtel, 120 minutes to all networks, unlimited SMS to Airtel, 3 GB data for 7 days at 5000 FCFA - Code: *141*2*2#
+- Monthly Voice: 320 minutes to Airtel, 30 minutes to all networks, 2 GB data for 30 days at 5000 FCFA - Code: *141*1*6#
+- Monthly Voice: 1000 minutes to Airtel, unlimited SMS to Airtel for 30 days at 5000 FCFA - Code: *141*1*4#
+- Monthly Voice: 3000 minutes to Airtel, 100 minutes to all networks, unlimited SMS to Airtel, 4 GB data for 30 days at 10000 FCFA - Code: *141*1*4#
+- Monthly Voice: Unlimited calls to Airtel, 300 minutes to all networks, unlimited SMS to Airtel, 12 GB data for 30 days at 20000 FCFA - Code: *141*2*3#
+- Night Voice: 120 minutes (11PM-4:59AM) for 24 hours at 100 FCFA - Code: *141*1*1#
+- Night Voice: 800 minutes (11PM-4:59AM) for 7 days at 500 FCFA - Code: *141*1*1#
+- Night Voice: 3500 minutes (11PM-4:59AM) for 30 days at 1500 FCFA - Code: *141*1*1#
+All voice plans are currently active and can be activated using their respective codes.
 
 Customer Support:
-- Hotline: 100 (toll-free)
-- WhatsApp Support: +227 90 00 00 00
+- Hotline: 121 (toll-free)
 - Email: support@airtel.ne
 - Operating Hours: 8AM to 8PM daily
 
 Account Management:
 - Recharge: Available at all Airtel shops and authorized dealers
-- Balance Check: Dial *100#
-- Data Usage: Dial *123#
-- Number Transfer: Available through portability service
+- Balance Check: Dial *121#
 
 Payment Methods:
 - Cash at Airtel shops
-- Mobile money (Orange Money, Moov Money)
-- Bank transfers
+- Airtel money
 - Credit/debit cards at authorized locations
 
 Network Coverage:
@@ -42,4 +75,4 @@ Special Offers:
 - Student packages: Discounted rates for students
 - Business packages: Customized solutions for corporate clients
 
-For the most up-to-date information and specific queries, please contact our customer service team. 
+For the most up-to-date information and specific queries, please contact our customer service team or visit our web site at https://airtel.ne. 
