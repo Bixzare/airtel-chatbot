@@ -137,16 +137,18 @@ export default function Chat() {
         style={{ minHeight: 0 }}
       >
         <div className="flex justify-end mb-2">
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            onClick={handleRestart}
-            title="Restart Chat"
-            disabled={isLoading}
-          >
-            <RotateCcw />
-          </Button>
+          {messages.length > 0 && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={handleRestart}
+              title="Restart Chat"
+              disabled={isLoading}
+            >
+              <RotateCcw />
+            </Button>
+          )}
         </div>
         {messages.length === 0 && (
           <div className="flex items-center justify-center h-full text-center text-base opacity-60">
@@ -206,7 +208,7 @@ export default function Chat() {
       >
         <Input
           type="text"
-          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "placeholder:text-black" : "placeholder:text-white" }`}
+          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "placeholder:text-[#E31F26]" : "placeholder:text-white" }`}
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -214,6 +216,7 @@ export default function Chat() {
           disabled={isLoading}
         />
         <Button
+          className={`${currentTheme === "dark" ? "bg-[#E31F26] text-white" : "bg-white text-[#E31F26]"}`}
           type="submit"
           variant="default"
           size="default"
