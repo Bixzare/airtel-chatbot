@@ -137,6 +137,21 @@ export default function Chat() {
           : "bg-[#E31F26] text-white"
       } shadow-lg p-4 transition-colors duration-300`}
     >
+      {/* Restart chat button */}
+      <div className="flex justify-start mb-2 w-full">
+        {messages.length > 0 && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={handleRestart}
+            title="Restart Chat"
+            disabled={isLoading}
+          >
+            <RotateCcw />
+          </Button>
+        )}
+      </div>
       {/* Messages area */}
       <div
         className={
@@ -146,20 +161,6 @@ export default function Chat() {
         tabIndex={0}
         style={{ minHeight: 0 }}
       >
-        <div className="flex justify-end mb-2">
-          {messages.length > 0 && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={handleRestart}
-              title="Restart Chat"
-              disabled={isLoading}
-            >
-              <RotateCcw />
-            </Button>
-          )}
-        </div>
         {messages.length === 0 && (
           <div className="flex items-center justify-center h-full text-center text-base opacity-60">
             Start the conversation!
