@@ -35,6 +35,7 @@ export default function Chat() {
   const [hasError, setHasError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [sessionId, setSessionId] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Set initial theme based on localStorage or system preference
   useEffect(() => {
@@ -57,6 +58,12 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    if (mounted && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [mounted, messages, isLoading, currentTheme]);
+
   const handleSend = async () => {
     if (!input.trim() || !sessionId) return;
     setHasError(null);
@@ -64,6 +71,7 @@ export default function Chat() {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+    inputRef.current?.focus();
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -81,6 +89,7 @@ export default function Chat() {
       setHasError(error.message || "Unknown error");
     } finally {
       setIsLoading(false);
+      inputRef.current?.focus();
     }
   };
 
@@ -99,6 +108,7 @@ export default function Chat() {
     if (typeof window !== "undefined") {
       localStorage.setItem("airtel-chatbot-session-id", newSessionId);
     }
+    inputRef.current?.focus();
   };
 
   // Use the skeleton loader only for a very brief moment during initial load
@@ -214,6 +224,8 @@ export default function Chat() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleInputKeyDown}
           disabled={isLoading}
+          autoFocus
+          ref={inputRef}
         />
         <Button
           className={`${currentTheme === "dark" ? "bg-[#E31F26] text-white" : "bg-white text-[#E31F26]"}`}
