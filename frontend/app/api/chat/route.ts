@@ -4,7 +4,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const backendRes = await fetch("http://localhost:8000/chat", {
+    const backendRes = await fetch("https://airtel-chatbot-backend-a6dr.onrender.com/", {
+    // const backendRes = await fetch("http://localhost:8000/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
