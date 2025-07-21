@@ -2,8 +2,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import { getInitialTheme } from "@/lib/utils";
+import { Ellipsis, SendHorizontal, RotateCcw } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -89,6 +91,16 @@ export default function Chat() {
     }
   };
 
+  const handleRestart = () => {
+    setMessages([]);
+    setHasError(null);
+    const newSessionId = uuidv4();
+    setSessionId(newSessionId);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("airtel-chatbot-session-id", newSessionId);
+    }
+  };
+
   // Use the skeleton loader only for a very brief moment during initial load
   if (!mounted) {
     return (
@@ -124,6 +136,18 @@ export default function Chat() {
         tabIndex={0}
         style={{ minHeight: 0 }}
       >
+        <div className="flex justify-end mb-2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={handleRestart}
+            title="Restart Chat"
+            disabled={isLoading}
+          >
+            <RotateCcw />
+          </Button>
+        </div>
         {messages.length === 0 && (
           <div className="flex items-center justify-center h-full text-center text-base opacity-60">
             Start the conversation!
@@ -180,9 +204,9 @@ export default function Chat() {
           handleSend();
         }}
       >
-        <input
+        <Input
           type="text"
-          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "text-black" : "text-white" }`}
+          className={`flex-1 rounded-md px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31F26] ${ currentTheme === "dark" ? "placeholder:text-black" : "placeholder:text-white" }`}
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -195,7 +219,7 @@ export default function Chat() {
           size="default"
           disabled={isLoading || !input.trim()}
         >
-          {isLoading ? "..." : "Send"}
+          {isLoading ? <Ellipsis className="animate-pulse" /> : <SendHorizontal />}
         </Button>
       </form>
     </div>
