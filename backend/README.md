@@ -8,9 +8,31 @@ A production-ready agentic RAG (Retrieval-Augmented Generation) pipeline using L
 - Vector similarity search for accurate document retrieval
 - Document chunking and processing
 - Persistent conversation memory
+- Automatic message history trimming
 - Extensible tools system
 - FastAPI streaming API
+- Streaming responses for real-time feedback
+- Automatic session management with timeout
 - Modular, testable, and production-ready
+
+## Memory Architecture
+
+The chatbot implements a dual memory system:
+
+1. **Short-Term Memory**: Uses LangGraph's `MemorySaver` for conversation state within a session
+   - Stores conversation history, retrieved documents, and tool call results
+   - Automatically managed by LangGraph's checkpointing system
+   - Backed up by an in-memory dictionary for reliability
+
+2. **Session Management**: 
+   - Tracks active sessions with timeouts
+   - Automatically clears inactive sessions after a configurable period
+   - Provides APIs for session listing and manual clearing
+
+3. **Future Long-Term Memory**:
+   - The architecture is designed to be extended with database-backed long-term memory
+   - The `Checkpointer` class includes a `db_path` parameter for future database integration
+   - This will enable persistent memory across sessions and server restarts
 
 ## Quick Start
 
@@ -24,6 +46,7 @@ A production-ready agentic RAG (Retrieval-Augmented Generation) pipeline using L
    GOOGLE_API_KEY=your_google_api_key
    MODEL_NAME=gemini-1.5-flash  # Optional, defaults to gemini-1.5-flash
    DOCUMENT_PATH=path/to/your/document.txt  # Optional, defaults to static_document.txt
+   SESSION_TIMEOUT_MINUTES=30  # Optional, defaults to 30 minutes
    ```
 
 3. Run the CLI for testing:
@@ -60,19 +83,27 @@ src/
 │   └── static_document.txt  # Sample document
 ├── memory/
 │   ├── __init__.py
-│   └── checkpointer.py     # Memory persistence
+│   ├── checkpointer.py     # Memory persistence
+│   └── session_manager.py  # Session management with timeout
 ├── config/
 │   ├── __init__.py
 │   └── settings.py         # Configuration settings
 └── api/
     ├── __init__.py
-    └── main.py             # FastAPI endpoints
+    └── main.py             # FastAPI endpoints with streaming support
 ```
 
 ## API Endpoints
 
 - `GET /`: Health check endpoint
-- `POST /chat`: Send a message to the chatbot
+- `POST /chat`: Send a message to the chatbot (non-streaming)
+  ```json
+  {
+    "session_id": "unique-session-id",
+    "message": "What are Airtel's data plans?"
+  }
+  ```
+- `POST /chat/stream`: Send a message to the chatbot with streaming response
   ```json
   {
     "session_id": "unique-session-id",
@@ -80,6 +111,34 @@ src/
   }
   ```
 - `DELETE /chat/{session_id}`: Clear a session's conversation history
+- `GET /sessions`: List all active sessions and their information
+
+## Streaming Responses
+
+The API supports streaming responses for a better user experience:
+
+1. **Server-Side**: The `/chat/stream` endpoint returns a Server-Sent Events (SSE) stream
+2. **Client-Side**: The frontend consumes the stream and updates the UI in real-time
+3. **Benefits**: Users see responses as they're generated, reducing perceived latency
+
+**Implementation Note**: The streaming implementation uses LangChain's `astream()` method which is specifically designed for Google's Generative AI models. This approach provides token-by-token streaming without any warnings or compatibility issues.
+
+## Message History Management
+
+The chatbot implements smart conversation history management:
+
+1. **Automatic Trimming**: Messages are automatically trimmed to prevent context window overflow
+2. **Token Limit**: A maximum of 4000 tokens is maintained in the conversation history
+3. **Retention Strategy**: The system message and most recent messages are prioritized
+4. **Benefits**: Prevents token limit errors while maintaining conversation coherence
+
+## Session Management
+
+Sessions are automatically managed with the following features:
+
+1. **Timeout**: Inactive sessions are automatically cleared after a configurable timeout period (default: 30 minutes)
+2. **Memory**: Conversation history is preserved between requests within the same session
+3. **Management**: Sessions can be manually cleared or listed via API endpoints
 
 ## RAG Pipeline
 
@@ -97,7 +156,6 @@ For deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 ## Next Steps
 
 - Add more specialized tools (calculator, summarizer, etc.)
-- Implement streaming responses
 - Add database integration for persistent storage
 - Add comprehensive test suite
 - Implement more sophisticated memory management

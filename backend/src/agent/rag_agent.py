@@ -8,30 +8,36 @@ from src.agent.agent_state import AgentState
 from src.memory.checkpointer import Checkpointer
 from src.prompts.system_prompt import AIRTEL_NIGER_SYSTEM_PROMPT
 from langgraph.graph import START, StateGraph
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, trim_messages
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import time
 import logging
 import re
+from typing import List, Dict, Any, Generator, AsyncGenerator, Optional, Tuple
+import asyncio
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# Maximum number of tokens to keep in conversation history
+MAX_HISTORY_TOKENS = 4000
+
 class LangGraphRAGAgent:
     """LangGraph-based RAG agent with memory, RAG tool, and LLM node."""
-    def __init__(self, document_path: str, model_name: str = "gemini-1.5-flash"):
+    def __init__(self, document_path: str, model_name: str = "gemini-1.5-flash", checkpointer=None):
         """
         Initialize the RAG agent with document path and model.
         
         Args:
             document_path: Path to the knowledge base document
             model_name: Name of the Google Generative AI model to use
+            checkpointer: Optional checkpointer instance for memory persistence
         """
         logger.info(f"Initializing RAG agent with document: {document_path}")
         
-        # Initialize LLM
+        # Initialize LLM for regular (non-streaming) calls
         self.llm = ChatGoogleGenerativeAI(
             model=model_name,
             google_api_key=os.environ.get("GOOGLE_API_KEY"),
@@ -41,13 +47,24 @@ class LangGraphRAGAgent:
             timeout=30  # 30 second timeout
         )
         
+        # Initialize message trimmer
+        self.message_trimmer = trim_messages(
+            max_tokens=MAX_HISTORY_TOKENS,
+            strategy="last",  # Keep the most recent messages
+            token_counter=self.llm,  # Use the LLM to count tokens
+            include_system=True,  # Always keep system messages
+            allow_partial=False,  # Don't allow partial messages
+            start_on="human"  # Start with a human message
+        )
+        
         # Initialize tools
         self.rag_tool = RAGTool(document_path)
         self.calculator_tool = CalculatorTool()
         self.summarizer_tool = SummarizerTool(llm=self.llm)
         
         # Initialize memory
-        self.checkpointer = Checkpointer()
+        from src.memory.checkpointer import Checkpointer
+        self.checkpointer = checkpointer or Checkpointer()
         
         # Build workflow
         self.workflow = self._build_workflow()
@@ -100,6 +117,10 @@ class LangGraphRAGAgent:
                     user_message = state["messages"][-1].content
                     logger.info(f"Processing query: {user_message}")
                     
+                    # Trim messages to prevent context window overflow
+                    trimmed_messages = self.message_trimmer.invoke(state["messages"])
+                    logger.info(f"Trimmed message history from {len(state['messages'])} to {len(trimmed_messages)} messages")
+                    
                     # Detect which tool to use
                     tool_name, tool_input = self._detect_tool_calls(user_message)
                     logger.info(f"Selected tool: {tool_name}")
@@ -127,18 +148,41 @@ class LangGraphRAGAgent:
                     system_prompt = AIRTEL_NIGER_SYSTEM_PROMPT
                     context_message = SystemMessage(content=f"{system_prompt}\n\nRelevant Information:\n{context}")
                     
-                    # Pass full conversation history to LLM
-                    llm_messages = [context_message] + state["messages"]
+                    # Pass trimmed conversation history to LLM
+                    llm_messages = [context_message] + trimmed_messages
                     logger.info("Calling LLM for response")
                     response = self.llm.invoke(llm_messages)
                     
-                    # Update state
-                    return {
+                    # Create updated state
+                    updated_state = {
                         "messages": state["messages"] + [AIMessage(content=response.content)],
                         "retrieved_docs": tool_result if tool_name == "rag" else state["retrieved_docs"],
                         "current_query": user_message,
                         "tool_calls": state["tool_calls"] + [{"tool": tool_name, "result": tool_result}]
                     }
+                    
+                    # Get thread_id from config if available
+                    thread_id = None
+                    try:
+                        # This is a bit of a hack to get the thread_id from the context
+                        # It assumes the thread_id is passed in the config
+                        from inspect import currentframe
+                        f = currentframe()
+                        while f:
+                            if 'config' in f.f_locals and isinstance(f.f_locals['config'], dict) and 'configurable' in f.f_locals['config']:
+                                thread_id = f.f_locals['config']['configurable'].get('thread_id')
+                                break
+                            f = f.f_back
+                    except Exception as e:
+                        logger.warning(f"Could not get thread_id from context: {str(e)}")
+                    
+                    # Save state to our manual store if thread_id is available
+                    if thread_id:
+                        self.checkpointer.save_state(updated_state, thread_id)
+                    
+                    # Return updated state
+                    return updated_state
+                    
                 except Exception as e:
                     logger.error(f"Error in agent node (attempt {attempt+1}/{max_retries}): {str(e)}")
                     if attempt < max_retries - 1:
@@ -207,4 +251,190 @@ class LangGraphRAGAgent:
         config = {"configurable": {"thread_id": thread_id}}
         result = self.workflow.invoke(state, config)
         updated_messages = result["messages"]
-        return result["messages"][-1].content, updated_messages 
+        return result["messages"][-1].content, updated_messages
+    
+    async def _process_query_and_get_context(self, query: str, messages: List[HumanMessage]) -> Tuple[str, Any]:
+        """
+        Process a query and get the context for LLM.
+        
+        Args:
+            query: User query
+            messages: Message history
+            
+        Returns:
+            Tuple of (context, tool_result)
+        """
+        # Trim messages to prevent context window overflow
+        trimmed_messages = self.message_trimmer.invoke(messages)
+        logger.info(f"Trimmed message history from {len(messages)} to {len(trimmed_messages)} messages for streaming")
+        
+        # Detect which tool to use
+        tool_name, tool_input = self._detect_tool_calls(query)
+        logger.info(f"Selected tool: {tool_name}")
+        
+        # Call appropriate tool
+        if tool_name == "calculator":
+            tool_result = self.calculator_tool(tool_input)
+            context = f"Calculator result: {tool_result}"
+            logger.info(f"Calculator result: {tool_result}")
+        elif tool_name == "summarizer":
+            tool_result = self.summarizer_tool(tool_input)
+            context = f"Summary points:\n" + "\n".join([f"- {point}" for point in tool_result])
+            logger.info(f"Summarizer result: {len(tool_result)} points")
+        else:  # Default to RAG
+            docs = self.rag_tool(query)
+            if docs and docs[0] != "No specific information found in the knowledge base for this query.":
+                logger.info(f"Retrieved {len(docs)} relevant document chunks")
+                context = "\n\n".join([f"Document chunk {i+1}:\n{doc}" for i, doc in enumerate(docs)])
+            else:
+                logger.warning("No relevant documents found")
+                context = "No specific information found in the knowledge base for this query."
+            tool_result = docs
+            
+        return context, tool_result
+    
+    async def invoke_with_streaming(self, query: str, thread_id: str = "default") -> AsyncGenerator[str, None]:
+        """
+        Invoke the agent with streaming response.
+        
+        Args:
+            query: User query
+            thread_id: Thread ID for conversation memory
+            
+        Yields:
+            Chunks of the response as they are generated
+        """
+        logger.info(f"Invoking agent with streaming for query: {query} (thread: {thread_id})")
+        
+        # Get conversation state from memory
+        config = {"configurable": {"thread_id": thread_id}}
+        try:
+            state = self.checkpointer.get_memory().load(config)
+        except Exception as e:
+            logger.warning(f"Could not load from memory: {str(e)}")
+            state = None
+        
+        # If not found in LangGraph memory, try our manual store
+        if state is None:
+            state = self.checkpointer.get_state(thread_id)
+        
+        # Initialize state if it doesn't exist
+        if state is None:
+            messages = [HumanMessage(content=query)]
+            state = {
+                "messages": messages,
+                "retrieved_docs": [],
+                "current_query": query,
+                "tool_calls": []
+            }
+        else:
+            # Add the new message to existing state
+            messages = state["messages"] + [HumanMessage(content=query)]
+            state = {
+                "messages": messages,
+                "retrieved_docs": state.get("retrieved_docs", []),
+                "current_query": query,
+                "tool_calls": state.get("tool_calls", [])
+            }
+        
+        try:
+            # Process query and get context
+            context, tool_result = await self._process_query_and_get_context(query, messages)
+            
+            # Prepare system prompt with context
+            system_prompt = AIRTEL_NIGER_SYSTEM_PROMPT
+            context_message = SystemMessage(content=f"{system_prompt}\n\nRelevant Information:\n{context}")
+            
+            # Trim messages to prevent context window overflow
+            trimmed_messages = self.message_trimmer.invoke(messages)
+            
+            # Pass trimmed conversation history to LLM
+            llm_messages = [context_message] + trimmed_messages
+            logger.info("Streaming LLM response")
+            
+            # Stream the response using the correct approach for Google's Generative AI
+            full_response = ""
+            async for chunk in self.llm.astream(llm_messages):
+                if hasattr(chunk, 'content'):
+                    content = chunk.content
+                    if content:
+                        full_response += content
+                        yield content
+            
+            # Update state with the complete response
+            state["messages"].append(AIMessage(content=full_response))
+            state["retrieved_docs"] = tool_result if isinstance(tool_result, list) else state["retrieved_docs"]
+            state["tool_calls"].append({"tool": "rag", "result": tool_result})
+            
+            # Save updated state using our manual method
+            self.checkpointer.save_state(state, thread_id)
+            
+        except Exception as e:
+            logger.error(f"Error in streaming response: {str(e)}")
+            fallback_response = "I'm experiencing technical difficulties. Please try again in a moment or contact Airtel customer service for immediate assistance."
+            yield fallback_response
+            
+            # Update state with fallback response
+            state["messages"].append(AIMessage(content=fallback_response))
+            self.checkpointer.save_state(state, thread_id)
+    
+    async def invoke_with_memory_streaming(self, messages, thread_id: str = "default") -> AsyncGenerator[str, None]:
+        """
+        Invoke the agent with a full message history and streaming response.
+        
+        Args:
+            messages: List of message objects
+            thread_id: Thread ID for conversation memory
+            
+        Yields:
+            Chunks of the response as they are generated
+        """
+        if not messages:
+            # Instead of returning a value, just don't yield anything
+            return
+        
+        query = messages[-1].content
+        logger.info(f"Invoking agent with streaming and message history (thread: {thread_id})")
+        
+        try:
+            # Process query and get context
+            context, tool_result = await self._process_query_and_get_context(query, messages)
+            
+            # Prepare system prompt with context
+            system_prompt = AIRTEL_NIGER_SYSTEM_PROMPT
+            context_message = SystemMessage(content=f"{system_prompt}\n\nRelevant Information:\n{context}")
+            
+            # Trim messages to prevent context window overflow
+            trimmed_messages = self.message_trimmer.invoke(messages)
+            
+            # Pass trimmed conversation history to LLM
+            llm_messages = [context_message] + trimmed_messages
+            logger.info("Streaming LLM response")
+            
+            # Stream the response using the correct approach for Google's Generative AI
+            full_response = ""
+            async for chunk in self.llm.astream(llm_messages):
+                if hasattr(chunk, 'content'):
+                    content = chunk.content
+                    if content:
+                        full_response += content
+                        yield content
+            
+            # Update messages with the complete response
+            updated_messages = messages + [AIMessage(content=full_response)]
+            
+            # Save state to memory
+            state = {
+                "messages": updated_messages,
+                "retrieved_docs": tool_result if isinstance(tool_result, list) else [],
+                "current_query": query,
+                "tool_calls": [{"tool": "rag", "result": tool_result}]
+            }
+            
+            # Save updated state using our manual method
+            self.checkpointer.save_state(state, thread_id)
+            
+        except Exception as e:
+            logger.error(f"Error in streaming response with memory: {str(e)}")
+            fallback_response = "I'm experiencing technical difficulties. Please try again in a moment or contact Airtel customer service for immediate assistance."
+            yield fallback_response 

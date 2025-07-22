@@ -36,6 +36,8 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [sessionId, setSessionId] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [streamingMessage, setStreamingMessage] = useState<string>("");
+  const eventSourceRef = useRef<EventSource | null>(null);
 
   // Set initial theme based on localStorage or system preference
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function Chat() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, streamingMessage]);
 
   useEffect(() => {
     if (mounted && inputRef.current) {
@@ -64,26 +66,86 @@ export default function Chat() {
     }
   }, [mounted, messages, isLoading, currentTheme]);
 
-  const handleSend = async () => {
+  // Clean up event source on component unmount
+  useEffect(() => {
+    return () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+    };
+  }, []);
+
+  const handleSendStreaming = async () => {
     if (!input.trim() || !sessionId) return;
     setHasError(null);
     const userMessage: Message = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+    setStreamingMessage("");
     inputRef.current?.focus();
+
     try {
-      const res = await fetch("/api/chat", {
+      // Close any existing event source
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+
+      // Create a new EventSource for SSE
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input, session_id: sessionId }),
+        body: JSON.stringify({ 
+          message: userMessage.content, 
+          session_id: sessionId,
+          stream: true 
+        }),
       });
-      if (!res.ok) throw new Error("Failed to get response from server");
-      const data = await res.json();
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.answer || data.response || "No response." },
-      ]);
+
+      // Handle streaming response
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      
+      if (!reader) {
+        throw new Error("Failed to get response reader");
+      }
+      
+      // Start reading the stream
+      let accumulatedResponse = "";
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          break;
+        }
+        
+        // Decode the chunk and process SSE format
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.substring(6);
+            
+            // Check for completion marker
+            if (data === '[DONE]') {
+              // Finalize the message
+              setMessages(prev => [
+                ...prev.slice(0, -1), 
+                { role: "user", content: userMessage.content },
+                { role: "assistant", content: accumulatedResponse }
+              ]);
+              setStreamingMessage("");
+              break;
+            } else {
+              // Accumulate the response
+              accumulatedResponse += data;
+              setStreamingMessage(accumulatedResponse);
+            }
+          }
+        }
+      }
     } catch (err) {
       const error = err as Error;
       setHasError(error.message || "Unknown error");
@@ -93,6 +155,11 @@ export default function Chat() {
     }
   };
 
+  const handleSend = async () => {
+    // Use streaming by default
+    await handleSendStreaming();
+  };
+
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -100,14 +167,31 @@ export default function Chat() {
     }
   };
 
-  const handleRestart = () => {
+  const handleRestart = async () => {
     setMessages([]);
+    setStreamingMessage("");
     setHasError(null);
+    
+    // Close any existing event source
+    if (eventSourceRef.current) {
+      eventSourceRef.current.close();
+      eventSourceRef.current = null;
+    }
+    
+    // Generate new session ID
     const newSessionId = uuidv4();
     setSessionId(newSessionId);
     if (typeof window !== "undefined") {
       localStorage.setItem("airtel-chatbot-session-id", newSessionId);
     }
+    
+    // Clear session on the server
+    try {
+      await fetch(`/api/chat/${sessionId}`, { method: "DELETE" });
+    } catch (err) {
+      console.error("Failed to clear session:", err);
+    }
+    
     inputRef.current?.focus();
   };
 
@@ -161,7 +245,7 @@ export default function Chat() {
         tabIndex={0}
         style={{ minHeight: 0 }}
       >
-        {messages.length === 0 && (
+        {messages.length === 0 && !streamingMessage && (
           <div className="flex items-center justify-center h-full text-center text-base opacity-60">
             Start the conversation!
           </div>
@@ -186,8 +270,22 @@ export default function Chat() {
             </div>
           </div>
         ))}
-        {/* Loading spinner */}
-        {isLoading && (
+        {/* Streaming message */}
+        {streamingMessage && (
+          <div className="flex w-full justify-start">
+            <div
+              className={`rounded-lg px-4 py-2 max-w-[80%] break-words text-sm shadow-md ${
+                currentTheme === "dark"
+                  ? "bg-gray-100 text-[#E31F26]"
+                  : "bg-[#fff7f7] text-[#E31F26]"
+              }`}
+            >
+              {streamingMessage}
+            </div>
+          </div>
+        )}
+        {/* Loading spinner - only show when no streaming message */}
+        {isLoading && !streamingMessage && (
           <div className="flex w-full justify-start">
             <div
               className={`rounded-lg px-4 py-2 max-w-[80%] shadow-md ${
