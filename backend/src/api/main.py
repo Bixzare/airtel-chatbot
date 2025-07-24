@@ -3,15 +3,12 @@ FastAPI endpoint for LangGraph RAG agent.
 """
 
 import logging
-from typing import List, Dict, Optional
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import HTTPException, Request
+from fastapi import HTTPException
 from fastapi.responses import StreamingResponse
 import uvicorn
 import os
-import time
 from datetime import datetime
-from typing import Dict
 from langchain_core.messages import HumanMessage, AIMessage
 from src.agent.rag_agent import LangGraphRAGAgent
 from src.memory.session_manager import SessionManager
@@ -141,7 +138,8 @@ async def chat_stream_endpoint(request: ChatRequest):
     try:
         session_id = request.session_id
         user_message = request.message
-        logger.info(f"Received streaming chat request for session {session_id}")
+        logger.info(
+            f"Received streaming chat request for session {session_id}")
 
         # Get message history for this session
         messages = session_manager.get_session(session_id)
@@ -150,21 +148,21 @@ async def chat_stream_endpoint(request: ChatRequest):
         # Define the streaming response generator
         async def response_generator():
             full_response = ""
-            
+
             # Use the streaming method
             async for chunk in agent.invoke_with_memory_streaming(messages, thread_id=session_id):
                 # Accumulate the full response
                 full_response += chunk
                 # Send each chunk as an SSE event
                 yield f"data: {chunk}\n\n"
-            
+
             # After streaming completes, update the session with the complete response
             updated_messages = messages + [AIMessage(content=full_response)]
             session_manager.update_session(session_id, updated_messages)
-            
+
             # Send a completion event
             yield "data: [DONE]\n\n"
-        
+
         # Return a streaming response
         return StreamingResponse(
             response_generator(),
@@ -190,7 +188,7 @@ async def clear_session(session_id: str):
     """
     session_cleared = session_manager.clear_session(session_id)
     state_cleared = agent.checkpointer.clear_state(session_id)
-    
+
     if session_cleared or state_cleared:
         logger.info(f"Cleared session history for {session_id}")
         return {"status": "ok", "message": f"Session {session_id} cleared"}
@@ -209,14 +207,14 @@ async def list_sessions():
     """
     sessions = session_manager.get_all_sessions()
     session_info = []
-    
+
     for session_id, data in sessions.items():
         session_info.append({
             "session_id": session_id,
             "message_count": len(data["messages"]),
             "last_activity": datetime.fromtimestamp(data["last_activity"])
         })
-    
+
     return {"sessions": session_info, "count": len(session_info), "timeout_minutes": session_timeout}
 
 

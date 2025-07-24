@@ -1,78 +1,403 @@
-Airtel Niger Services and Information
-====================================
+📱✨ Airtel Niger – Services et Offres Principales
 
-Mobile Services:
-Airtel Niger provides comprehensive mobile telecommunications services including voice calls, SMS, and data services. Our network covers major cities and towns across Niger.
+---
 
-Unlimited Plans:
-Airtel offers the best unlimited plans with unlimited calls and SMS to Airtel network, minutes to other Niger networks, and data for browsing on Niger's best internet connection:
-- 500 FCFA (24H): Unlimited calls to Airtel, 10 minutes to all networks, 100 MB data - Code: *141*2#
-- 1000 FCFA (48H): Unlimited calls to Airtel, 20 minutes to all networks, unlimited SMS to Airtel, 500 MB data - Code: *141*2#
-- 3000 FCFA (7 days): Unlimited calls to Airtel, 60 minutes to all networks, 2 GB data - Code: *141*2#
-- 5000 FCFA (7 days): Unlimited calls to Airtel, 120 minutes to all networks, unlimited SMS to Airtel, 3 GB data - Code: *141*2#
-- 10000 FCFA (30 days): 3000 minutes to Airtel, 100 minutes to all networks, unlimited SMS to Airtel, 4 GB data - Code: *141*1#
-- 20000 FCFA (30 days): Unlimited calls to Airtel, 300 minutes to all networks, unlimited SMS to Airtel, 12 GB data - Code: *141*2#
+🔴 **Services Mobiles Airtel Niger**
+Airtel Niger propose des services mobiles complets : appels, SMS, Internet mobile, et une couverture réseau étendue dans tout le pays.
 
-Data Plans:
-- Hourly Data: 500MB for 1 hour at 200 FCFA
-- Hourly Data: 1GB for 1 hour at 350 FCFA
-- Daily Data: 25MB for 24 hours at 100 FCFA (100% bonus: +25MB for 24H when recharged on Mon/Wed/Fri)
-- Daily Data: 40MB for 24 hours at 150 FCFA (100% bonus: +40MB for 24H when recharged on Mon/Wed/Fri)
-- Daily Data: 75MB for 24 hours at 200 FCFA (100% bonus: +75MB for 24H when recharged on Mon/Wed/Fri)
-- Daily Data: 125MB for 24 hours at 300 FCFA (100% bonus: +125MB for 24H when recharged on Mon/Wed/Fri)
-- Daily Data: 600MB for 24 hours at 500 FCFA (100% bonus: +600MB for 24H when recharged on Mon/Wed/Fri)
-- Night Data: 200MB from 12AM to 5AM at 250 FCFA (100% bonus: +200MB for 5H when recharged on Mon/Wed/Fri)
-- Night Data: 1.2GB from 12AM to 5AM at 500 FCFA (100% bonus: +1.2GB for 5H when recharged on Mon/Wed/Fri)
-- Night Data: 5GB from 12AM to 5AM at 1000 FCFA (100% bonus: +5GB for 5H when recharged on Mon/Wed/Fri)
-- Night Data: 10GB from 12AM to 5AM at 1500 FCFA (100% bonus: +10GB for 5H when recharged on Mon/Wed/Fri)
-- Weekly Data: 400MB for 7 days at 500 FCFA (100% bonus: +400MB for 48H when recharged on Mon/Wed/Fri)
-- Weekly Data: 1GB for 7 days at 1000 FCFA (100% bonus: +1GB for 48H when recharged on Mon/Wed/Fri)
-- Weekly Data: 3GB for 7 days at 2000 FCFA (100% bonus: +3GB for 48H when recharged on Mon/Wed/Fri)
-- Weekly Data: 5GB for 7 days at 3000 FCFA (100% bonus: +5GB for 48H when recharged on Mon/Wed/Fri)
-All data plans can be activated using *141*3# and are currently active. Special 100% bonus data available when recharged on Mondays, Wednesdays, and Fridays with specific validity periods for the bonus portion.
+---
 
-Voice Plans:
-- Daily Voice: 7 minutes to Airtel, 7 minutes to all networks for 24 hours at 50 FCFA - Code: *141*1*1#
-- Daily Voice: 15 minutes to Airtel, 15 minutes to all networks for 24 hours at 100 FCFA - Code: *141*1*1#
-- Daily Voice: 32 minutes to Airtel, 32 minutes to all networks for 24 hours at 200 FCFA - Code: *141*1*1#
-- 2-Day Voice: 50 minutes to Airtel, 50 minutes to all networks for 48 hours at 300 FCFA - Code: *141*1*1#
-- Daily Voice: Unlimited calls to Airtel, 10 minutes to all networks, 100 MB data for 24 hours at 500 FCFA - Code: *141*1*1#
-- 2-Day Voice: Unlimited calls to Airtel, 20 minutes to all networks, unlimited SMS to Airtel, 500 MB data for 48 hours at 1000 FCFA - Code: *141*2*1#
-- Weekly Voice: 75 minutes to Airtel, 75 minutes to all networks for 7 days at 500 FCFA - Code: *141*1*3#
-- Weekly Voice: 200 minutes to Airtel, 200 minutes to all networks for 7 days at 1000 FCFA - Code: *141*1*3#
-- Weekly Voice: 250 minutes to Airtel for 7 days at 1500 FCFA - Code: *141*1*3#
-- Weekly Voice: 105 minutes to Airtel, 30 minutes to all networks, 500 MB data for 7 days at 1500 FCFA - Code: *141*1*6#
-- Weekly Voice: Unlimited calls to Airtel, 60 minutes to all networks, 2 GB data for 7 days at 3000 FCFA - Code: *141*2*2#
-- Weekly Voice: Unlimited calls to Airtel, 120 minutes to all networks, unlimited SMS to Airtel, 3 GB data for 7 days at 5000 FCFA - Code: *141*2*2#
-- Monthly Voice: 320 minutes to Airtel, 30 minutes to all networks, 2 GB data for 30 days at 5000 FCFA - Code: *141*1*6#
-- Monthly Voice: 1000 minutes to Airtel, unlimited SMS to Airtel for 30 days at 5000 FCFA - Code: *141*1*4#
-- Monthly Voice: 3000 minutes to Airtel, 100 minutes to all networks, unlimited SMS to Airtel, 4 GB data for 30 days at 10000 FCFA - Code: *141*1*4#
-- Monthly Voice: Unlimited calls to Airtel, 300 minutes to all networks, unlimited SMS to Airtel, 12 GB data for 30 days at 20000 FCFA - Code: *141*2*3#
-- Night Voice: 120 minutes (11PM-4:59AM) for 24 hours at 100 FCFA - Code: *141*1*1#
-- Night Voice: 800 minutes (11PM-4:59AM) for 7 days at 500 FCFA - Code: *141*1*1#
-- Night Voice: 3500 minutes (11PM-4:59AM) for 30 days at 1500 FCFA - Code: *141*1*1#
-All voice plans are currently active and can be activated using their respective codes.
+🚀 **Forfaits Illimités**
+- 💸 500 FCFA (24H) : Appels illimités Airtel, 10 min tous réseaux, 100 Mo internet – *Code :* *141*2#
+- 💸 1000 FCFA (48H) : Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo – *Code :* *141*2#
+- 💸 3000 FCFA (7j) : Appels illimités Airtel, 60 min tous réseaux, 2 Go – *Code :* *141*2#
+- 💸 5000 FCFA (7j) : Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go – *Code :* *141*2#
+- 💸 10000 FCFA (30j) : 3000 min Airtel, 100 min tous réseaux, SMS illimités Airtel, 4 Go – *Code :* *141*1#
+- 💸 20000 FCFA (30j) : Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go – *Code :* *141*2#
 
-Customer Support:
-- Hotline: 121 (toll-free)
-- Email: support@airtel.ne
-- Operating Hours: 8AM to 8PM daily
+---
 
-Account Management:
+🌐 **Forfaits Internet**
+- ⏰ 500 Mo/1h : 200 FCFA
+- ⏰ 1 Go/1h : 350 FCFA
+- 📅 25 Mo/24h : 100 FCFA (+25 Mo bonus lun/mer/ven)
+- 📅 40 Mo/24h : 150 FCFA (+40 Mo bonus lun/mer/ven)
+- 📅 75 Mo/24h : 200 FCFA (+75 Mo bonus lun/mer/ven)
+- 📅 125 Mo/24h : 300 FCFA (+125 Mo bonus lun/mer/ven)
+- 📅 600 Mo/24h : 500 FCFA (+600 Mo bonus lun/mer/ven)
+- 🌙 200 Mo (00h-5h) : 250 FCFA (+200 Mo bonus lun/mer/ven)
+- 🌙 1,2 Go (00h-5h) : 500 FCFA (+1,2 Go bonus lun/mer/ven)
+- 🌙 5 Go (00h-5h) : 1000 FCFA (+5 Go bonus lun/mer/ven)
+- 🌙 10 Go (00h-5h) : 1500 FCFA (+10 Go bonus lun/mer/ven)
+- 📅 400 Mo/7j : 500 FCFA (+400 Mo bonus 48h lun/mer/ven)
+- 📅 1 Go/7j : 1000 FCFA (+1 Go bonus 48h lun/mer/ven)
+- 📅 3 Go/7j : 2000 FCFA (+3 Go bonus 48h lun/mer/ven)
+- 📅 5 Go/7j : 3000 FCFA (+5 Go bonus 48h lun/mer/ven)
+
+Activation : *141*3#
+
+---
+
+📞 **Forfaits Voix**
+- 🗣️ 7 min Airtel + 7 min tous réseaux/24h : 50 FCFA – *Code :* *141*1*1#
+- 🗣️ 15 min Airtel + 15 min tous réseaux/24h : 100 FCFA – *Code :* *141*1*1#
+- 🗣️ 32 min Airtel + 32 min tous réseaux/24h : 200 FCFA – *Code :* *141*1*1#
+- 🗣️ 50 min Airtel + 50 min tous réseaux/48h : 300 FCFA – *Code :* *141*1*1#
+- 🗣️ Appels illimités Airtel, 10 min tous réseaux, 100 Mo/24h : 500 FCFA – *Code :* *141*1*1#
+- 🗣️ Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo/48h : 1000 FCFA – *Code :* *141*2*1#
+- 🗣️ 75 min Airtel + 75 min tous réseaux/7j : 500 FCFA – *Code :* *141*1*3#
+- 🗣️ 200 min Airtel + 200 min tous réseaux/7j : 1000 FCFA – *Code :* *141*1*3#
+- 🗣️ 250 min Airtel/7j : 1500 FCFA – *Code :* *141*1*3#
+- 🗣️ 105 min Airtel + 30 min tous réseaux + 500 Mo/7j : 1500 FCFA – *Code :* *141*1*6#
+- 🗣️ Appels illimités Airtel, 60 min tous réseaux, 2 Go/7j : 3000 FCFA – *Code :* *141*2*2#
+- 🗣️ Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go/7j : 5000 FCFA – *Code :* *141*2*2#
+- 🗣️ 320 min Airtel + 30 min tous réseaux + 2 Go/30j : 5000 FCFA – *Code :* *141*1*6#
+- 🗣️ 1000 min Airtel, SMS illimités Airtel/30j : 5000 FCFA – *Code :* *141*1*4#
+- 🗣️ 3000 min Airtel + 100 min tous réseaux, SMS illimités Airtel, 4 Go/30j : 10000 FCFA – *Code :* *141*1*4#
+- 🗣️ Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go/30j : 20000 FCFA – *Code :* *141*2*3#
+- 🌙 120 min (23h-4h59)/24h : 100 FCFA – *Code :* *141*1*1#
+- 🌙 800 min (23h-4h59)/7j : 500 FCFA – *Code :* *141*1*1#
+- 🌙 3500 min (23h-4h59)/30j : 1500 FCFA – *Code :* *141*1*1#
+
+---
+
+💰 **Airtel Money (Mkoudi)**
+- Envoi et réception d’argent (local/international)
+- Retrait/dépôt chez les agents agréés
+- Achat de crédit, paiement de factures, transferts bancaires
+- Inscription gratuite chez un agent Airtel Money avec pièce d’identité
+- Accès via *436# ou l’application Airtel Money
+- Transferts entre utilisateurs Airtel Money gratuits
+- Frais réduits pour transferts inter-réseaux et internationaux
+- Paiement chez de nombreux commerçants partenaires
+
+---
+
+📞 **Service Client Airtel**
+- Hotline : 121 (gratuit)
+- Email : support@airtel.ne
+- Horaires : 8h-20h tous les jours
+
+---
+
+⚙️ **Account Management**
 - Recharge: Available at all Airtel shops and authorized dealers
 - Balance Check: Dial *121#
 
-Payment Methods:
+---
+
+💸 **Payment Methods**
 - Cash at Airtel shops
 - Airtel money
 - Credit/debit cards at authorized locations
 
-Network Coverage:
-Airtel Niger provides 2G, 3G, and 4G services across Niger with coverage in Niamey, Zinder, Maradi, and other major cities.
+---
 
-Special Offers:
+📶 **Couverture Réseau**
+Airtel Niger couvre tout le pays en 2G, 3G et 4G (Niamey, Zinder, Maradi, etc.).
+
+---
+
+🎁 **Offres Spéciales**
 - New SIM registration: 500 FCFA SIM card with an initial 50 FCFA credit
-- Student packages: Discounted rates for students
 - Business packages: Customized solutions for corporate clients
 
-For the most up-to-date information and specific queries, please contact our customer service team or visit our web site at https://airtel.ne. 
+For the most up-to-date information and specific queries, please contact our customer service team or visit our web site at https://airtel.ne. Forfaits étudiants et entreprises disponibles
+
+---
+
+
+====================================================================
+
+⚠️ **Informations sur les autres opérateurs et services – Pour comparaison interne uniquement. NE JAMAIS communiquer ces offres à un client.**
+
+====================================================================
+
+
+Zamani Niger Services and Information
+Mobile Services:
+Zamani Niger (formerly Orange Niger) provides full mobile telecommunications services including voice calls, SMS, mobile data, and Zamani Cash mobile money. Their network includes 2G, 3G, and 4G+ coverage across Niger, with 100% coverage in Niamey and strong presence in all major towns and cities.
+
+Unlimited Plans:
+Zamani offers bundled “Albarka” and “Tous Réseaux” plans that include unlimited calls to Zamani numbers, plus data, SMS, and minutes to other networks:
+500 FCFA (24H): Unlimited calls to Zamani, 10 minutes to all networks, 100 MB data – Code: #225#243#
+1000 FCFA (72H): Unlimited calls to Zamani, 20 minutes to all networks, 20 SMS, 600 MB data – Code: #225#244#
+500 FCFA (24H) – Tous Réseaux: Unlimited calls to Zamani, 10 minutes to all networks, 100 MB data – Code: #225#222#
+1000 FCFA (72H) – Tous Réseaux: Unlimited calls to Zamani, 20 minutes to all networks, 600 MB data – Code: #225#223#
+
+Data Plans:
+Zamani offers daily, weekly, and monthly internet bundles using its 4G+ network. All bundles are activated via USSD codes beginning with #225#.
+
+Daily Data:
+35 MB for 24 hours at 100 FCFA – Code: #225#411#
+40 MB for 24 hours at 150 FCFA – Code: #225#412#
+75 MB for 24 hours at 200 FCFA – Code: #225#413#
+125 MB for 24 hours at 300 FCFA – Code: #225#414#
+600 MB for 24 hours at 500 FCFA – Code: #225#415#
+
+Weekly Data:
+400 MB for 7 days at 500 FCFA – Code: #225#421#
+1 GB for 7 days at 1000 FCFA – Code: #225#422#
+3 GB for 7 days at 2000 FCFA – Code: #225#423#
+5 GB for 7 days at 3000 FCFA – Code: #225#424#
+
+Monthly Data:
+2 GB for 30 days at 2000 FCFA – Code: #225#431#
+6 GB for 30 days at 5000 FCFA – Code: #225#432#
+16 GB for 30 days at 10000 FCFA – Code: #225#433#
+40 GB for 30 days at 20000 FCFA – Code: #225#434#
+
+Voice Plans:
+Zamani offers multiple call/SMS bundles with short-term and long-term validity.
+Zamani to Zamani (Z-Z) Voice + SMS:
+100 FCFA (24H): 18 minutes + 18 SMS to Zamani – Code: #225#211#
+200 FCFA (24H): 40 minutes + 40 SMS to Zamani – Code: #225#212#
+500 FCFA (3 days): 80 minutes + 80 SMS to Zamani – Code: #225#213#
+1500 FCFA (7 days): 250 minutes to Zamani – Code: #225#214#
+5000 FCFA (30 days): 1200 minutes + 1200 SMS to Zamani – Code: #225#215#
+
+All Networks (Tous Réseaux) Voice + SMS:
+50 FCFA (24H): 7 minutes to all networks, 10 SMS – Code: #225#224#
+100 FCFA (24H): 15 minutes to all networks, 15 SMS – Code: #225#225#
+200 FCFA (24H): 47 minutes (32 to all networks), 32 SMS – Code: #225#2266#
+500 FCFA (7 days): 100 minutes (75 to all networks), 100 SMS – Code: #225#2267#
+1000 FCFA (7 days): 250 minutes (200 to all networks), 200 SMS – Code: #225#2268#
+
+Customer Support:
+Hotline: 222 (toll-free)
+Zamani Cash Hotline: 1313 (toll-free)
+Website: https://www.zamanitelecom.com
+Customer support also available via chat on the website
+
+Account Management:
+Recharge: Available via scratch cards, authorized vendors, and Zamani Cash
+Balance Check: Dial #225# and follow menu prompts
+Mobile App: Available for iOS and Android
+
+Payment Methods:
+Cash at Zamani shops and partners
+Zamani Cash mobile money
+Bank card payments (at select authorized locations)
+
+Network Coverage:
+Zamani Telecom provides 2G, 3G, and 4G+ coverage across Niger. Niamey is fully covered with 4G+, and all major towns (Zinder, Maradi, Tahoua, Agadez, etc.) have robust voice and data coverage.
+
+Special Offers:
+No standing public offers for students or business customers are listed on Zamani’s official platforms. Promotional bonuses may appear on a seasonal basis and are usually announced via Facebook or SMS.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Moov Niger Services and Information
+English / Français
+
+Mobile Services
+EN: Moov Africa Niger provides nationwide mobile voice, SMS, and data services over 2G, 3G, and 4G networks. 4G LTE was launched in July 2025. Moov also sells devices through its boutiques, including phones and modems (e.g., Oukitel C15 Pro for 55 000 FCFA, C17 Pro for 100 000 FCFA).
+FR: Moov Africa Niger offre des services de téléphonie mobile, SMS et Internet sur l’ensemble du territoire à travers les réseaux 2G, 3G et 4G. Le service 4G LTE a été lancé en juillet 2025. Des téléphones et modems sont également vendus dans les boutiques Moov (ex: Oukitel C15 Pro à 55 000 FCFA, C17 Pro à 100 000 FCFA).
+
+Unlimited Plans (Forfaits No Limit)
+EN: These bundles offer unlimited Moov-to-Moov calls and SMS, minutes to other networks, and data.
+FR: Ces forfaits incluent des appels et SMS illimités vers Moov, des minutes vers d'autres réseaux, et du volume Internet.
+
+Price	Validity	Benefits	Activation Code
+500 FCFA	24H	Unlimited Moov calls, 12 min to others, 150 MB	515311*1#
+1000 FCFA	3 days	Unlimited Moov calls & SMS, 23 min to others, 1 GB	515312*1#
+3000 FCFA	7 days	Unlimited Moov calls & SMS, 70 min to others, 3 GB	515313*1#
+5000 FCFA	10 days	Unlimited Moov calls & SMS, 125 min to others, 3.5 GB	515314*1#
+10000 FCFA	30 days	Unlimited Moov calls & SMS, 200 min to others, 5 GB	515315*1#
+20000 FCFA	30 days	Unlimited Moov calls & SMS, 320 min to others, 16 GB	515316*1#
+
+Data Plans (Forfaits Internet)
+EN: Prepaid Internet bundles activated via USSD or SMS.
+FR: Forfaits Internet prépayés activables par USSD ou SMS.
+
+Daily Plans (Valid 24H)
+Price	Data	Activation
+100 FCFA	35 MB	*888#
+150 FCFA	55 MB	*888#
+200 FCFA	100 MB	*888#
+300 FCFA	150 MB	*888#
+500 FCFA	650 MB	*888#
+1000 FCFA	1.5 GB	*888#
+
+Weekly Plans (Valid 7 Days)
+Price	Data	Activation
+500 FCFA	600 MB	*888#
+1000 FCFA	1.2 GB	*888#
+2000 FCFA	3 GB	*888#
+3000 FCFA	5.2 GB	*888#
+
+Monthly Plans (Valid 30 Days)
+Price	Data	Activation
+2000 FCFA	2 GB	*888#
+5000 FCFA	6.2 GB	*888#
+10000 FCFA	17 GB	*888#
+20000 FCFA	42 GB	*888#
+
+Night Plans (Valid 00:00–06:00)
+Price	Data	Activation
+100 FCFA	300 MB	*888#
+200 FCFA	750 MB	*888#
+500 FCFA	3 GB	*888#
+1000 FCFA	7 GB	*888#
+1500 FCFA	12 GB	*888#
+
+Voice Plans
+Moov Flex – Daily & Weekly
+Price	Validity	Benefits	Activation
+50 FCFA	24H	8 min (all net), 8 SMS	515117*1#
+100 FCFA	24H	16 min, 32 SMS	515117*2#
+200 FCFA	24H	32 min, 80 SMS	515117*3#
+300 FCFA	24H	50 min, 120 SMS	515117*4#
+500 FCFA	24H	75 min, 150 SMS	515117*5#
+1000 FCFA	7 Days	200 min, 220 SMS	515117*6#
+
+Night Voice Plans (22:00–05:00)
+Price	Validity	Minutes	Activation
+100 FCFA	1 night	125 min	USSD via menu
+200 FCFA	1 night	280 min	USSD via menu
+500 FCFA	7 nights	850 min	USSD via menu
+1500 FCFA	30 nights	3500 min	USSD via menu
+
+Garabassa Plans (Moov-to-Moov only)
+Price	Validity	Moov Minutes & SMS	Activation
+50 FCFA	24H	10 min, 10 SMS	USSD
+100 FCFA	24H	30 min, 30 SMS	USSD
+200 FCFA	24H	60 min, 60 SMS	USSD
+500 FCFA	72H	160 min, 160 SMS	USSD
+1000 FCFA	7 Days	400 min, 400 SMS	USSD
+
+Prestige Bundles (Voice + SMS + Data)
+Price	Validity	Bundle	Activation
+500 FCFA	24H	10 min + 10 SMS + 50 MB	USSD
+1000 FCFA	48H	20 min + 200 SMS + 200 MB	USSD
+2000 FCFA	7 Days	45 min + 450 SMS + 450 MB	USSD
+5000 FCFA	15 Days	150 min + 1024 SMS + 1 GB	USSD
+
+Moov Money
+EN: Moov’s mobile wallet for domestic/international transfers, bill payments, airtime top-ups, and more.
+FR: Portefeuille mobile pour transferts, paiements de factures, recharges, etc.
+
+Key Features
+Transfers: 1.8% fee (domestic/international) – 1571#
+
+Bill Payments:
+NIGELEC (electricity): 1574*1#
+SEEN (water): 1574*3#
+Canal+ (TV): 1574*5# – Free
+Telestar (DTT): 1574*4# – Free
+
+Top-up: No fees
+Service Menu: *157#
+
+Account Management
+Recharge: Via Moov shops, vendors, Moov Money
+Balance Check: (Not specified – inquire via *888# or Moov menu)
+
+Customer Support
+Contact Methods:
+Moov Niger does not publish direct support hotlines or emails.
+Use social media (Facebook/Twitter) or visit a Moov shop.
+
+Payment Methods
+Cash: Available at all retail points
+Moov Money: Transfer from wallet
+Possibly Cards: Not confirmed online – likely accepted in major boutiques
+
+Network Coverage
+2G / 3G / 4G LTE across Niger
+4G launched July 2025
+
+Major coverage: Niamey, Maradi, Zinder, Tahoua, Dosso, and urban centers
+
+Devices for Sale
+Examples:
+Oukitel C15 Pro – 55 000 FCFA
+Oukitel C17 Pro – 100 000 FCFA
+Volcano 1 – 35 000 FCFA
+Alcatel 1T7 – 25 000 FCFA
+
+NITA – Money Transfer Service in Niger
+History and Launch:
+NITA (Niger Transfert d’Argent) is a fully Nigerien financial company launched in 2017. Officially licensed in 2018 as a payment services provider by the Central Bank of West African States (BCEAO), NITA offers both traditional and digital money transfer services. In 2025, NITA entered a key partnership with MoneyGram to enable international remittance withdrawals directly through its agent network. Its mobile platform, MyNITA, offers a wallet and various payment services.
+
+Main Features
+Cash transfers between individuals via NITA agents
+
+Wallet-to-wallet digital money transfers using the MyNITA app
+
+Bill payments for utilities and services
+
+Mobile airtime top-up for local operators
+
+International remittance withdrawal in local currency
+
+Mobile wallet to hold funds and pay digitally
+
+Agent locator and transfer fee estimator in the app
+
+Registration and Usage
+Registration via agents or the MyNITA mobile app
+
+Valid national ID and local phone number required
+
+Must be a Niger resident to open a wallet
+
+4-digit PIN required to authorize transactions
+
+Services accessible via app and physical points of service
+
+Tariffs and Fees
+Low flat or percentage-based fees on transfers
+
+Cash transfers and bill payments may include minor service charges
+
+All applicable fees are visible in-app and posted at agent locations
+
+Transaction fees are automatically deducted from the sender’s wallet or paid in cash
+
+Agent Network
+Thousands of NITA agents and branches across Niger
+
+Available in over 800 localities
+
+Urban and rural distribution ensures broad accessibility
+
+Partner locations enabled for international remittance collection
+
+Legal and Regulatory Framework
+Fully licensed by BCEAO as a payment services provider
+
+Authorized to issue electronic money
+
+Compliant with regional anti-money-laundering and KYC regulations
+
+Certified by BCEAO for digital wallet operations
+
+Usage Statistics
+MyNITA app has over 100,000 Android downloads
+
+Broad and growing agent presence
+
+Widely used for both cash and digital transfers
+
+Growing demand for its services through international partnerships
+
+Advantages
+Local ownership and strong national identity
+
+Accessible in both cities and rural areas
+
+Supports both digital and cash-based transactions
+
+Simple, multilingual mobile app
+
+Accepts international money transfers directly
+
+Disadvantages
+Cash withdrawals still required for many users
+
+Smartphone use may be limited in rural regions
+
+Less widely known than telecom-backed services
+
+Growth stage compared to more mature platforms

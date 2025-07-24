@@ -4,101 +4,63 @@ Zamani Niger (formerly Orange Niger) provides full mobile telecommunications ser
 
 Unlimited Plans:
 Zamani offers bundled “Albarka” and “Tous Réseaux” plans that include unlimited calls to Zamani numbers, plus data, SMS, and minutes to other networks:
-
 500 FCFA (24H): Unlimited calls to Zamani, 10 minutes to all networks, 100 MB data – Code: #225#243#
-
 1000 FCFA (72H): Unlimited calls to Zamani, 20 minutes to all networks, 20 SMS, 600 MB data – Code: #225#244#
-
 500 FCFA (24H) – Tous Réseaux: Unlimited calls to Zamani, 10 minutes to all networks, 100 MB data – Code: #225#222#
-
 1000 FCFA (72H) – Tous Réseaux: Unlimited calls to Zamani, 20 minutes to all networks, 600 MB data – Code: #225#223#
 
 Data Plans:
 Zamani offers daily, weekly, and monthly internet bundles using its 4G+ network. All bundles are activated via USSD codes beginning with #225#.
 
 Daily Data:
-
 35 MB for 24 hours at 100 FCFA – Code: #225#411#
-
 40 MB for 24 hours at 150 FCFA – Code: #225#412#
-
 75 MB for 24 hours at 200 FCFA – Code: #225#413#
-
 125 MB for 24 hours at 300 FCFA – Code: #225#414#
-
 600 MB for 24 hours at 500 FCFA – Code: #225#415#
 
 Weekly Data:
-
 400 MB for 7 days at 500 FCFA – Code: #225#421#
-
 1 GB for 7 days at 1000 FCFA – Code: #225#422#
-
 3 GB for 7 days at 2000 FCFA – Code: #225#423#
-
 5 GB for 7 days at 3000 FCFA – Code: #225#424#
 
 Monthly Data:
-
 2 GB for 30 days at 2000 FCFA – Code: #225#431#
-
 6 GB for 30 days at 5000 FCFA – Code: #225#432#
-
 16 GB for 30 days at 10000 FCFA – Code: #225#433#
-
 40 GB for 30 days at 20000 FCFA – Code: #225#434#
 
 Voice Plans:
 Zamani offers multiple call/SMS bundles with short-term and long-term validity.
-
 Zamani to Zamani (Z-Z) Voice + SMS:
-
 100 FCFA (24H): 18 minutes + 18 SMS to Zamani – Code: #225#211#
-
 200 FCFA (24H): 40 minutes + 40 SMS to Zamani – Code: #225#212#
-
 500 FCFA (3 days): 80 minutes + 80 SMS to Zamani – Code: #225#213#
-
 1500 FCFA (7 days): 250 minutes to Zamani – Code: #225#214#
-
 5000 FCFA (30 days): 1200 minutes + 1200 SMS to Zamani – Code: #225#215#
 
 All Networks (Tous Réseaux) Voice + SMS:
-
 50 FCFA (24H): 7 minutes to all networks, 10 SMS – Code: #225#224#
-
 100 FCFA (24H): 15 minutes to all networks, 15 SMS – Code: #225#225#
-
 200 FCFA (24H): 47 minutes (32 to all networks), 32 SMS – Code: #225#2266#
-
 500 FCFA (7 days): 100 minutes (75 to all networks), 100 SMS – Code: #225#2267#
-
 1000 FCFA (7 days): 250 minutes (200 to all networks), 200 SMS – Code: #225#2268#
 
 Customer Support:
-
 Hotline: 222 (toll-free)
-
 Zamani Cash Hotline: 1313 (toll-free)
-
 Website: https://www.zamanitelecom.com
-
 Customer support also available via chat on the website
 
 Account Management:
-
 Recharge: Available via scratch cards, authorized vendors, and Zamani Cash
-
 Balance Check: Dial #225# and follow menu prompts
-
 Mobile App: Available for iOS and Android
 
 Payment Methods:
-
 Cash at Zamani shops and partners
-
 Zamani Cash mobile money
-
 Bank card payments (at select authorized locations)
 
 Network Coverage:
@@ -106,6 +68,8 @@ Zamani Telecom provides 2G, 3G, and 4G+ coverage across Niger. Niamey is fully c
 
 Special Offers:
 No standing public offers for students or business customers are listed on Zamani’s official platforms. Promotional bonuses may appear on a seasonal basis and are usually announced via Facebook or SMS.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Moov Niger Services and Information
 English / Français
@@ -201,17 +165,12 @@ Key Features
 Transfers: 1.8% fee (domestic/international) – 1571#
 
 Bill Payments:
-
 NIGELEC (electricity): 1574*1#
-
 SEEN (water): 1574*3#
-
 Canal+ (TV): 1574*5# – Free
-
 Telestar (DTT): 1574*4# – Free
 
 Top-up: No fees
-
 Service Menu: *157#
 
 Account Management
@@ -220,32 +179,25 @@ Balance Check: (Not specified – inquire via *888# or Moov menu)
 
 Customer Support
 Contact Methods:
-
 Moov Niger does not publish direct support hotlines or emails.
-
 Use social media (Facebook/Twitter) or visit a Moov shop.
 
 Payment Methods
 Cash: Available at all retail points
-
 Moov Money: Transfer from wallet
-
 Possibly Cards: Not confirmed online – likely accepted in major boutiques
 
 Network Coverage
 2G / 3G / 4G LTE across Niger
-
 4G launched July 2025
 
 Major coverage: Niamey, Maradi, Zinder, Tahoua, Dosso, and urban centers
 
 Devices for Sale
 Examples:
-
 Oukitel C15 Pro – 55 000 FCFA
-
 Oukitel C17 Pro – 100 000 FCFA
-
 Volcano 1 – 35 000 FCFA
-
 Alcatel 1T7 – 25 000 FCFA
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
