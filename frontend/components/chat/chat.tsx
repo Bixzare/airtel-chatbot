@@ -256,7 +256,7 @@ export default function Chat() {
             className={`flex w-full ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`rounded-lg px-4 py-2 max-w-[80%] break-words text-sm shadow-md ${
+              className={`rounded-lg px-4 py-2 max-w-[80%] break-words whitespace-pre-wrap text-sm shadow-md ${
                 msg.role === "user"
                   ? currentTheme === "dark"
                     ? "bg-[#E31F26] text-white"
