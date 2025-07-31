@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     
     // For streaming responses, we need to forward the stream directly
     if (stream) {
-      const backendRes = await fetch(`http://localhost:8000/${endpoint}`, {
+      const backendRes = await fetch(`https://airtel-chatbot-backend-a6dr.onrender.com/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
