@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       });
     } else {
       // Non-streaming response (original behavior)
-      const backendRes = await fetch(`http://localhost:8000/${endpoint}`, {
+      const backendRes = await fetch(`https://airtel-chatbot-backend-a6dr.onrender.com/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
