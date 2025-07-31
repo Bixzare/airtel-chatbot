@@ -62,14 +62,69 @@ Activation : *141*3#
 ---
 
 💰 **Airtel Money (Mkoudi)**
-- Envoi et réception d’argent (local/international)
-- Retrait/dépôt chez les agents agréés
-- Achat de crédit, paiement de factures, transferts bancaires
-- Inscription gratuite chez un agent Airtel Money avec pièce d’identité
-- Accès via *436# ou l’application Airtel Money
-- Transferts entre utilisateurs Airtel Money gratuits
-- Frais réduits pour transferts inter-réseaux et internationaux
-- Paiement chez de nombreux commerçants partenaires
+
+À propos d'Airtel Money:
+Airtel Money Niger SA est une société spécialisée dans l’émission, la distribution et la promotion de la monnaie électronique, créée le 21 décembre 2009 sous le numéro d’immatriculation RCCM NI-NIA-2012-M-2191.
+Elle est depuis le 6 juillet 2022, le seul Etablissement de Monnaie Electronique au Niger sur décision n°194-07-2022 de la BCEAO.
+Présente dans les huit (8) régions et contrées du Niger, Airtel Money offre un service qui transforme le téléphone en un porte-monnaie électronique, permettant ainsi à ses utilisateurs d'effectuer plusieurs transactions sans avoir à se déplacer, facilitant donc les opérations de la vie courante.
+
+Avec le service Airtel Money, vous pouvez :
+    • Acheter du crédit de communication instantanément 24h/24, 7h/7 à vous même ou à une autre personne à partir de votre téléphone
+    • Acheter des forfaits internet ou appels pour soi ou pour autrui
+    • Transférer de l'argent partout au Niger d’un compte Airtel Money à un autre compte Airtel Money
+    • Envoyer des codes de retraits vers tous les réseaux à des coûts intéressants
+    • Activer les abonnements Canal+, 24h/24 et 7j/7
+    • Régler vos factures d'Eau et d'électricité 24h/24 et 7j/7 (postpayées)
+    • Payer vos achats effectués dans les Supers-marchés, pharmacies, alimentations générales, stations services, restaurants, etc.
+    • Faire des transactions bancaires :
+        o Vérifier vos soldes de comptes bancaires,
+        o Envoyer de l'argent de votre téléphone à votre compte bancaire
+        o Créditer votre compte Airtel Money en débitant directement votre compte binaire
+        o Service disponible avec BOA, Ecobank, Orabank et Sonibank
+
+Airtel Money est accessible à tous les abonnés Airtel et l'ouverture de compte est totalement gratuite.
+Pourquoi choisir Airtel Money ?
+Système stable, sûr, un réseau de qualité fiable.
+Un message de confirmation pour chaque transaction effectuée (vous êtes en mesure de savoir à qui vous envoyez de l'argent et de qui vous avez reçu de l'argent).
+Simple à utiliser et instantané, maintenant accessible avec un réseau de point dépôts/retraits dispersé à l'échelle nationale.
+
+Transfert d'argent au Niger:
+Grace à Airtel Money, vous pouvez transférer de l'argent vers des bénéficiaires qui ont un compte Airtel Money et même vers des numéros qui n'ont pas de compte Airtel Money.
+Les bénéficiaires n'ayant pas de compte Airtel Money (tous les réseaux au Niger sont éligibles) recevront un code de retrait qu'ils pourront retirer au niveau de nos distributeurs partout au Niger.
+Pour transférer de l'argent vers un compte Airtel Money, vous composez la syntaxe *436*1*1*1# puis vous suivez les instructions.
+Pour transférer de l'argent vers un compte Airtel Money, vous composez la syntaxe *436*1*3*1# puis vous suivez les instructions.
+Type de service	| Frais
+Retrait cash 	2,5%
+Retrait code 	Gratuit
+Seuil	|   Compte complet    |    Compte temporaire
+Limite max. d’utilisation/jour 	2,000,000   200,000
+Montant max. par transaction.	2,000,000	200,000
+Limite mensuelle	10,000,000	200,000
+
+Transfert d'argent à l'international
+Désormais vous pouvez transférer de l'argent à l'international vers les pays en partenariat avec Airtel money. Pour transférer de l'argent à l'étranger, composez *436# puis choisissez l'option 1, ensuite l'option 2 - international et suivez les instructions.
+
+Transfert d'argent vers un numéro international 
+Pour le moment, nous avons un partenariat avec les opérateurs dans les pays ci-dessous :
+• Bénin : MOOV
+• Burkina Faso : Orange Burkina
+• Cote d’Ivoire : MTN, MOOV
+• Sénégal : Free Money
+
+Réception d'argent vers un numéro Airtel Money 
+Vous pouvez directement recevoir de l’argent de l’international directement dans votre compte Airtel Money à partir grâce à plusieurs partenariats noués avec des opérateurs en Afrique et dans le monde.
+Ces partenariats permettent aux clients Airtel Money du Niger de recevoir de l’argent via :
+• Orange Money Europe
+• MTN Côte d’Ivoire ;
+• Free Money Sénégal
+• Moov Benin
+• PayPal
+• MoneyGram (https://www.moneygram.com/),
+• World Remit ( https://www.worldremit.com/en),
+• Ezipay (https://ezipay.africa/),
+• Kemitkingdom (https://www.kemitkingdom.com/)
+• SamallWorld
+• Et d’autres qui sont en cours d’intégrations.
 
 ---
 
@@ -322,82 +377,53 @@ NITA (Niger Transfert d’Argent) is a fully Nigerien financial company launched
 
 Main Features
 Cash transfers between individuals via NITA agents
-
 Wallet-to-wallet digital money transfers using the MyNITA app
-
 Bill payments for utilities and services
-
 Mobile airtime top-up for local operators
-
 International remittance withdrawal in local currency
-
 Mobile wallet to hold funds and pay digitally
-
 Agent locator and transfer fee estimator in the app
 
 Registration and Usage
 Registration via agents or the MyNITA mobile app
-
 Valid national ID and local phone number required
-
 Must be a Niger resident to open a wallet
-
 4-digit PIN required to authorize transactions
-
 Services accessible via app and physical points of service
 
 Tariffs and Fees
 Low flat or percentage-based fees on transfers
-
 Cash transfers and bill payments may include minor service charges
-
 All applicable fees are visible in-app and posted at agent locations
-
 Transaction fees are automatically deducted from the sender’s wallet or paid in cash
 
 Agent Network
 Thousands of NITA agents and branches across Niger
-
 Available in over 800 localities
-
 Urban and rural distribution ensures broad accessibility
-
 Partner locations enabled for international remittance collection
 
 Legal and Regulatory Framework
 Fully licensed by BCEAO as a payment services provider
-
 Authorized to issue electronic money
-
 Compliant with regional anti-money-laundering and KYC regulations
-
 Certified by BCEAO for digital wallet operations
 
 Usage Statistics
 MyNITA app has over 100,000 Android downloads
-
 Broad and growing agent presence
-
 Widely used for both cash and digital transfers
-
 Growing demand for its services through international partnerships
 
 Advantages
 Local ownership and strong national identity
-
 Accessible in both cities and rural areas
-
 Supports both digital and cash-based transactions
-
 Simple, multilingual mobile app
-
 Accepts international money transfers directly
 
 Disadvantages
 Cash withdrawals still required for many users
-
 Smartphone use may be limited in rural regions
-
 Less widely known than telecom-backed services
-
 Growth stage compared to more mature platforms
