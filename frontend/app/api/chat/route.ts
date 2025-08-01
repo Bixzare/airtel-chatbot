@@ -10,7 +10,8 @@ export async function POST(req: NextRequest) {
     
     // For streaming responses, we need to forward the stream directly
     if (stream) {
-      const backendRes = await fetch(`https://airtel-chatbot-backend-a6dr.onrender.com/${endpoint}`, {
+      const backendRes = await fetch(`https://airtel-chatbot-backend-4v9u.onrender.com/${endpoint}`, {
+      // const backendRes = await fetch(`http://localhost:8000/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -35,7 +36,8 @@ export async function POST(req: NextRequest) {
       });
     } else {
       // Non-streaming response (original behavior)
-      const backendRes = await fetch(`https://airtel-chatbot-backend-a6dr.onrender.com/${endpoint}`, {
+      const backendRes = await fetch(`https://airtel-chatbot-backend-4v9u.onrender.com/${endpoint}`, {
+      // const backendRes = await fetch(`http://localhost:8000/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
