@@ -124,28 +124,28 @@ export default function Chat() {
         const chunk = decoder.decode(value);
         const lines = chunk.split('\n\n');
         
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.substring(6);
-            
-            // Check for completion marker
-            if (data === '[DONE]') {
-              // Finalize the message
-              setMessages(prev => [
-                ...prev.slice(0, -1), 
-                { role: "user", content: userMessage.content },
-                { role: "assistant", content: accumulatedResponse }
-              ]);
-              setStreamingMessage("");
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const data = line.substring(6);
+                
+                // Check for completion marker
+                if (data === '[DONE]') {
+                  // Finalize the message
+                  setMessages(prev => [
+                    ...prev.slice(0, -1), 
+                    { role: "user", content: userMessage.content },
+                    { role: "assistant", content: accumulatedResponse }
+                  ]);
+                  setStreamingMessage("");
               break;
-            } else {
-              // Accumulate the response
-              accumulatedResponse += data;
-              setStreamingMessage(accumulatedResponse);
+                } else {
+                  // Accumulate the response
+                  accumulatedResponse += data;
+                  setStreamingMessage(accumulatedResponse);
+                }
+              }
             }
           }
-        }
-      }
     } catch (err) {
       const error = err as Error;
       setHasError(error.message || "Unknown error");
@@ -274,7 +274,7 @@ export default function Chat() {
         {streamingMessage && (
           <div className="flex w-full justify-start">
             <div
-              className={`rounded-lg px-4 py-2 max-w-[80%] break-words text-sm shadow-md ${
+              className={`rounded-lg px-4 py-2 max-w-[80%] break-words whitespace-pre-wrap text-sm shadow-md ${
                 currentTheme === "dark"
                   ? "bg-gray-100 text-[#E31F26]"
                   : "bg-[#fff7f7] text-[#E31F26]"
