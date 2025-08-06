@@ -75,6 +75,8 @@ export default function Chat() {
     };
   }, []);
 
+  // STREAMING FUNCTION - DISABLED BUT CODE PRESERVED FOR FUTURE USE
+  // To re-enable streaming, change handleSend() to call handleSendStreaming() instead of handleSendNonStreaming()
   const handleSendStreaming = async () => {
     if (!input.trim() || !sessionId) return;
     setHasError(null);
@@ -155,9 +157,55 @@ export default function Chat() {
     }
   };
 
+  // NON-STREAMING FUNCTION - ENABLED BY DEFAULT
+  const handleSendNonStreaming = async () => {
+    if (!input.trim() || !sessionId) return;
+    setHasError(null);
+    const userMessage: Message = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+    inputRef.current?.focus();
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          message: userMessage.content, 
+          session_id: sessionId,
+          stream: false 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.response) {
+        setMessages(prev => [
+          ...prev,
+          { role: "assistant", content: data.response }
+        ]);
+      } else {
+        throw new Error("No response received from server");
+      }
+    } catch (err) {
+      const error = err as Error;
+      setHasError(error.message || "Unknown error");
+    } finally {
+      setIsLoading(false);
+      inputRef.current?.focus();
+    }
+  };
+
   const handleSend = async () => {
-    // Use streaming by default
-    await handleSendStreaming();
+    // STREAMING DISABLED - Using non-streaming endpoint
+    // To re-enable streaming, change this line to: await handleSendStreaming();
+    await handleSendNonStreaming();
+    // await handleSendStreaming();
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
