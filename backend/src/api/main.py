@@ -17,6 +17,7 @@ from src.config.settings import Settings
 from pydantic import BaseModel
 from fastapi import FastAPI
 from dotenv import load_dotenv
+import time
 load_dotenv()
 
 
@@ -55,6 +56,9 @@ document_path = os.environ.get("DOCUMENT_PATH", "src/rag/static_document.txt")
 model_name = os.environ.get("MODEL_NAME", "gemini-1.5-flash")
 agent = LangGraphRAGAgent(document_path, model_name, checkpointer=checkpointer)
 
+# Performance tracking
+request_times = []
+
 
 class ChatRequest(BaseModel):
     session_id: str
@@ -89,6 +93,7 @@ async def chat_endpoint(request: ChatRequest):
     Returns:
         ChatResponse with the agent's response
     """
+    start_time = time.time()
     try:
         session_id = request.session_id
         user_message = request.message
@@ -114,12 +119,20 @@ async def chat_endpoint(request: ChatRequest):
         }
         agent.checkpointer.save_state(state, thread_id=session_id)
 
+        # Track performance
+        response_time = time.time() - start_time
+        request_times.append(response_time)
+        if len(request_times) > 100:  # Keep only last 100 requests
+            request_times.pop(0)
+
         logger.info(
-            f"Successfully processed chat request for session {session_id}")
+            f"Successfully processed chat request for session {session_id} in {response_time:.2f}s")
         return {"response": response, "session_id": session_id}
 
     except Exception as e:
-        logger.error(f"Error processing chat request: {str(e)}")
+        response_time = time.time() - start_time
+        logger.error(
+            f"Error processing chat request in {response_time:.2f}s: {str(e)}")
         raise HTTPException(
             status_code=500, detail=f"Error processing request: {str(e)}")
 
@@ -173,6 +186,48 @@ async def chat_stream_endpoint(request: ChatRequest):
         logger.error(f"Error processing streaming chat request: {str(e)}")
         raise HTTPException(
             status_code=500, detail=f"Error processing streaming request: {str(e)}")
+
+
+@app.get("/performance")
+async def get_performance_stats():
+    """
+    Get performance statistics.
+
+    Returns:
+        Performance statistics including response times and cache stats
+    """
+    try:
+        # Calculate response time statistics
+        if request_times:
+            avg_response_time = sum(request_times) / len(request_times)
+            min_response_time = min(request_times)
+            max_response_time = max(request_times)
+        else:
+            avg_response_time = min_response_time = max_response_time = 0
+
+        # Get cache statistics if available
+        cache_stats = None
+        if hasattr(agent.rag_tool, 'cache') and agent.rag_tool.cache:
+            cache_stats = agent.rag_tool.cache.get_stats()
+
+        return {
+            "response_times": {
+                "average_seconds": round(avg_response_time, 2),
+                "min_seconds": round(min_response_time, 2),
+                "max_seconds": round(max_response_time, 2),
+                "total_requests": len(request_times)
+            },
+            "cache_stats": cache_stats,
+            "settings": {
+                "llm_timeout": settings.llm_timeout,
+                "max_history_tokens": settings.max_history_tokens,
+                "rag_cache_enabled": settings.rag_cache_enabled
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error getting performance stats: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error getting performance stats: {str(e)}")
 
 
 @app.delete("/chat/{session_id}")
