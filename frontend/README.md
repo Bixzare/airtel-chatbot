@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Airtel Chatbot - Frontend
 
-## Getting Started
+Interface utilisateur Next.js pour le chatbot Airtel Niger avec RAG (Retrieval-Augmented Generation).
 
-First, run the development server:
+## 🚀 Quick Start
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📚 Documentation complète
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pour une documentation détaillée, consultez le dossier [`../docs/`](../docs/) :
 
-## Learn More
+- [Guide de démarrage rapide](../docs/getting-started.md)
+- [Configuration du streaming](../docs/configuration/streaming.md)
+- [Déploiement local](../docs/deployment/local.md)
+- [Problèmes courants](../docs/troubleshooting/common-issues.md)
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Interface moderne** avec Next.js 14 et App Router
+- **Chat en temps réel** avec le backend RAG
+- **Design responsive** optimisé mobile/desktop
+- **Thème sombre/clair** automatique
+- **Gestion des sessions** persistante
+- **Streaming optionnel** des réponses
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 Technologies
 
-## Deploy on Vercel
+- **Next.js 14** - Framework React
+- **TypeScript** - Typage statique
+- **Tailwind CSS** - Styling
+- **shadcn/ui** - Composants UI
+- **Lucide React** - Icônes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📁 Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+frontend/
+├── app/                 # Pages et API routes
+│   ├── api/            # API routes Next.js
+│   └── page.tsx        # Page principale
+├── components/         # Composants React
+│   ├── chat/          # Composants de chat
+│   ├── ui/            # Composants UI
+│   └── theme/         # Gestion du thème
+└── lib/               # Utilitaires
+```
