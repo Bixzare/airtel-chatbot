@@ -51,13 +51,67 @@ session_manager = SessionManager(timeout_minutes=session_timeout)
 checkpointer = Checkpointer(db_path=settings.checkpoint_db_path)
 logger.info("Using in-memory checkpointer for short-term memory")
 
-# Initialize RAG agent with the checkpointer
-document_path = os.environ.get("DOCUMENT_PATH", "src/rag/static_document.txt")
-model_name = os.environ.get("MODEL_NAME", "gemini-1.5-flash")
-agent = LangGraphRAGAgent(document_path, model_name, checkpointer=checkpointer)
+# Global variable to store the agent
+# agent = None
 
 # Performance tracking
 request_times = []
+
+# HTTP timeout settings
+HTTP_TIMEOUT = int(os.environ.get("HTTP_TIMEOUT", 30)
+                   )  # Timeout pour les requêtes HTTP
+
+
+def preload_documents():
+    """
+    Preload static documents to warm up the RAG system and improve response times.
+    This function loads all static documents and performs initial embeddings.
+    """
+    logger.info("Starting document preloading for performance optimization...")
+    start_time = time.time()
+
+    try:
+        # Get document path from environment or use default
+        document_path = os.environ.get(
+            "DOCUMENT_PATH", "src/rag/static_document.txt")
+        model_name = os.environ.get("MODEL_NAME", "gemini-1.5-flash")
+
+        # Check if document exists
+        if os.path.exists(document_path):
+            logger.info(f"Found document: {document_path}")
+        else:
+            logger.warning(f"Document not found: {document_path}")
+            logger.error("No document found to preload!")
+            return None
+
+        # Initialize RAG agent with single document
+        global agent
+        agent = LangGraphRAGAgent(
+            document_path, model_name, checkpointer=checkpointer)
+
+        # Perform a test query to warm up the system
+        logger.info("Performing test query to warm up embeddings and cache...")
+        test_query = "Airtel Niger services"
+        agent.rag_tool(test_query)
+
+        preload_time = time.time() - start_time
+        logger.info(
+            f"Document preloading completed in {preload_time:.2f} seconds")
+        logger.info(
+            f"Loaded document with {agent.rag_tool.num_chunks} total chunks")
+        logger.info(f"Cache initialized: {agent.rag_tool.cache is not None}")
+
+        return agent
+
+    except Exception as e:
+        logger.error(f"Error during document preloading: {str(e)}")
+        # Fallback: initialize agent without preloading
+        document_path = os.environ.get(
+            "DOCUMENT_PATH", "src/rag/static_document.txt")
+        model_name = os.environ.get("MODEL_NAME", "gemini-1.5-flash")
+        agent = LangGraphRAGAgent(
+            document_path, model_name, checkpointer=checkpointer)
+        return agent
 
 
 class ChatRequest(BaseModel):
@@ -95,6 +149,11 @@ async def chat_endpoint(request: ChatRequest):
     """
     start_time = time.time()
     try:
+        # Check if agent is initialized
+        if agent is None:
+            raise HTTPException(
+                status_code=503, detail="RAG Agent is not initialized")
+
         session_id = request.session_id
         user_message = request.message
         logger.info(f"Received chat request for session {session_id}")
@@ -149,6 +208,11 @@ async def chat_stream_endpoint(request: ChatRequest):
         StreamingResponse with the agent's response chunks
     """
     try:
+        # Check if agent is initialized
+        if agent is None:
+            raise HTTPException(
+                status_code=503, detail="RAG Agent is not initialized")
+
         session_id = request.session_id
         user_message = request.message
         logger.info(
@@ -207,7 +271,7 @@ async def get_performance_stats():
 
         # Get cache statistics if available
         cache_stats = None
-        if hasattr(agent.rag_tool, 'cache') and agent.rag_tool.cache:
+        if agent and hasattr(agent.rag_tool, 'cache') and agent.rag_tool.cache:
             cache_stats = agent.rag_tool.cache.get_stats()
 
         return {
@@ -242,7 +306,8 @@ async def clear_session(session_id: str):
         Success message
     """
     session_cleared = session_manager.clear_session(session_id)
-    state_cleared = agent.checkpointer.clear_state(session_id)
+    state_cleared = agent.checkpointer.clear_state(
+        session_id) if agent else False
 
     if session_cleared or state_cleared:
         logger.info(f"Cleared session history for {session_id}")
@@ -277,7 +342,16 @@ async def list_sessions():
 async def startup_event():
     """Run on application startup."""
     logger.info("Starting Airtel RAG Agent API")
-    # Any additional startup tasks can go here
+
+    # Preload documents for performance optimization
+    global agent
+    agent = preload_documents()
+
+    if agent:
+        logger.info(
+            "RAG Agent initialized successfully with preloaded documents")
+    else:
+        logger.error("Failed to initialize RAG Agent")
 
 
 @app.on_event("shutdown")

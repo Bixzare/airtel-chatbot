@@ -21,14 +21,14 @@ class Settings:
 
     # Memory settings
     # Path to database for future long-term memory (not used with MemorySaver)
-    checkpoint_db_path: str = None
+    checkpoint_db_path: str = ""
     session_timeout_minutes: int = int(
         os.environ.get("SESSION_TIMEOUT_MINUTES", 30))
     max_history_tokens: int = 3000  # Reduced from 4000 for faster processing
 
     # Performance optimization settings
     # Reduced from 30 seconds
-    llm_timeout: int = int(os.environ.get("LLM_TIMEOUT", 20))
+    llm_timeout: int = int(os.environ.get("LLM_TIMEOUT", 60))
     rag_cache_enabled: bool = os.environ.get(
         "RAG_CACHE_ENABLED", "true").lower() == "true"
     max_concurrent_requests: int = int(

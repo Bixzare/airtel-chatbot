@@ -15,7 +15,7 @@ import os
 import time
 import logging
 import re
-from typing import List, Any, AsyncGenerator, Tuple
+from typing import List, Any, AsyncGenerator, Tuple, Optional
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
@@ -29,7 +29,7 @@ MAX_HISTORY_TOKENS = 3000
 class LangGraphRAGAgent:
     """LangGraph-based RAG agent with memory, RAG tool, and LLM node."""
 
-    def __init__(self, document_path: str, model_name: str = "gemini-1.5-flash", checkpointer=None):
+    def __init__(self, document_path: str, model_name: str = "gemini-1.5-flash", checkpointer=None, additional_documents: Optional[List[str]] = None):
         """
         Initialize the RAG agent with document path and model.
 
@@ -37,8 +37,12 @@ class LangGraphRAGAgent:
             document_path: Path to the knowledge base document
             model_name: Name of the Google Generative AI model to use
             checkpointer: Optional checkpointer instance for memory persistence
+            additional_documents: List of additional document paths to load
         """
         logger.info(f"Initializing RAG agent with document: {document_path}")
+        if additional_documents:
+            logger.info(
+                f"Additional documents to load: {additional_documents}")
 
         # Initialize LLM for regular (non-streaming) calls - OPTIMIZED FOR SPEED
         self.llm = ChatGoogleGenerativeAI(
@@ -48,7 +52,7 @@ class LangGraphRAGAgent:
             top_p=0.8,  # Reduced for faster generation
             top_k=20,  # Reduced for faster generation
             # Reduced timeout for faster responses
-            timeout=int(os.environ.get("LLM_TIMEOUT", 20))
+            timeout=int(os.environ.get("LLM_TIMEOUT", 60))
         )
 
         # Initialize message trimmer
@@ -61,8 +65,9 @@ class LangGraphRAGAgent:
             start_on="human"  # Start with a human message
         )
 
-        # Initialize tools
-        self.rag_tool = RAGTool(document_path)
+        # Initialize tools with multiple documents
+        self.rag_tool = RAGTool(
+            document_path, additional_documents=additional_documents or [])
         self.calculator_tool = CalculatorTool()
         self.summarizer_tool = SummarizerTool(llm=self.llm)
 

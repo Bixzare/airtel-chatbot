@@ -1,67 +1,63 @@
-# Airtel RAG Agent
+# Airtel RAG Agent - Backend
 
 A production-ready agentic RAG (Retrieval-Augmented Generation) pipeline using LangGraph, LangChain, Google embeddings, and an extensible tool system.
 
-## Features
-- ReAct agent with tool-calling (LangGraph)
-- RAG with Google text-embedding-004 and FAISS
-- Vector similarity search for accurate document retrieval
-- Document chunking and processing
-- Persistent conversation memory
-- Automatic message history trimming
-- Extensible tools system
-- FastAPI streaming API
-- Streaming responses for real-time feedback
-- Automatic session management with timeout
-- Modular, testable, and production-ready
+## 🚀 Quick Start
 
-## Memory Architecture
+```bash
+# Installer les dépendances
+pip install -r requirements.txt
 
-The chatbot implements a dual memory system:
+# Configuration
+cp env.example .env
+# Éditer .env avec votre clé API Google
 
-1. **Short-Term Memory**: Uses LangGraph's `MemorySaver` for conversation state within a session
-   - Stores conversation history, retrieved documents, and tool call results
-   - Automatically managed by LangGraph's checkpointing system
-   - Backed up by an in-memory dictionary for reliability
+# Lancer le serveur
+python start_server.py
+```
 
-2. **Session Management**: 
-   - Tracks active sessions with timeouts
-   - Automatically clears inactive sessions after a configurable period
-   - Provides APIs for session listing and manual clearing
+## 📚 Documentation complète
 
-3. **Future Long-Term Memory**:
-   - The architecture is designed to be extended with database-backed long-term memory
-   - The `Checkpointer` class includes a `db_path` parameter for future database integration
-   - This will enable persistent memory across sessions and server restarts
+Pour une documentation détaillée, consultez le dossier [`../docs/`](../docs/) :
 
-## Quick Start
+- [Guide de démarrage rapide](../docs/getting-started.md)
+- [Configuration des performances](../docs/configuration/performance.md)
+- [Déploiement local](../docs/deployment/local.md)
+- [Déploiement Vercel](../docs/deployment/vercel.md)
+- [Problèmes courants](../docs/troubleshooting/common-issues.md)
 
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 🔧 Features
 
-2. Set environment variables in `.env`:
-   ```
-   GOOGLE_API_KEY=your_google_api_key
-   MODEL_NAME=gemini-1.5-flash  # Optional, defaults to gemini-1.5-flash
-   DOCUMENT_PATH=path/to/your/document.txt  # Optional, defaults to static_document.txt
-   SESSION_TIMEOUT_MINUTES=30  # Optional, defaults to 30 minutes
-   ```
+- **ReAct agent** avec appel d'outils (LangGraph)
+- **RAG** avec Google text-embedding-004 et FAISS
+- **Recherche vectorielle** pour une récupération précise de documents
+- **Mémoire conversationnelle** persistante
+- **API FastAPI** avec streaming
+- **Système de cache** optimisé
+- **Architecture modulaire** et extensible
 
-3. Run the CLI for testing:
-   ```bash
-   # Interactive mode
-   python -m src.cli --interactive
-   
-   # Single query mode
-   python -m src.cli "What are Airtel's data plans?"
-   ```
+## 🧪 Tests
 
-4. Run the API:
-   ```bash
-   python -m uvicorn src.api.main:app --reload
-   ```
+```bash
+# Test interactif
+python -m src.cli --interactive
+
+# Test simple
+python -m src.cli "What are Airtel's data plans?"
+
+# Test de performance
+python tests/test_performance.py
+
+# Test du préchargement
+python tests/test_preloading.py
+```
+
+## 🌐 API Endpoints
+
+- **GET `/`** - Health check
+- **POST `/chat`** - Endpoint de chat
+- **GET `/performance`** - Métriques de performance
+- **GET `/docs`** - Documentation API (Swagger)
 
 ## Project Structure
 ```
@@ -172,6 +168,7 @@ For deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 - pydantic>=2.0.0
 - python-dotenv>=1.0.0
 - numpy>=1.24.0
+- aiohttp>=3.9.0
 
 ## License
 MIT 

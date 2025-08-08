@@ -16,7 +16,7 @@ class RAGTool(BaseTool):
     name = "rag_search"
     description = "Search the knowledge base for relevant information."
 
-    def __init__(self, document_path_or_content: str, is_file_path: bool = True):
+    def __init__(self, document_path_or_content: str, is_file_path: bool = True, additional_documents: Optional[List[str]] = None):
         # Load settings
         self.settings = Settings()
         """
@@ -25,6 +25,7 @@ class RAGTool(BaseTool):
         Args:
             document_path_or_content: Path to document file or raw document content
             is_file_path: Whether the first argument is a file path (True) or raw content (False)
+            additional_documents: List of additional document paths to load
         """
         # OPTIMIZED FOR SPEED - Smaller chunks and overlap for faster processing
         self.processor = DocumentProcessor(chunk_size=400, chunk_overlap=50)
@@ -34,7 +35,7 @@ class RAGTool(BaseTool):
         # Initialize cache if enabled
         self.cache = RAGCache() if self.settings.rag_cache_enabled else None
 
-        # Process the document
+        # Process the main document
         if is_file_path and os.path.exists(document_path_or_content):
             documents = self.processor.load_file(document_path_or_content)
         else:
@@ -44,12 +45,30 @@ class RAGTool(BaseTool):
                 metadata={"source": "static_content"}
             )
 
-        # Add to vector store
+        # Add main document to vector store
         self.vector_store.add_documents(documents)
+        total_chunks = len(documents)
+
+        # Process additional documents if provided (optional)
+        if additional_documents and len(additional_documents) > 0:
+            for doc_path in additional_documents:
+                if os.path.exists(doc_path):
+                    try:
+                        additional_docs = self.processor.load_file(doc_path)
+                        self.vector_store.add_documents(additional_docs)
+                        total_chunks += len(additional_docs)
+                        print(
+                            f"Loaded additional document: {doc_path} ({len(additional_docs)} chunks)")
+                    except Exception as e:
+                        print(
+                            f"Error loading additional document {doc_path}: {e}")
+                else:
+                    print(f"Additional document not found: {doc_path}")
 
         # Store the number of chunks for logging
-        self.num_chunks = len(documents)
-        print(f"RAG Tool initialized with {self.num_chunks} document chunks")
+        self.num_chunks = total_chunks
+        print(
+            f"RAG Tool initialized with {self.num_chunks} total document chunks")
 
     def __call__(self, query: str) -> List[str]:
         """
@@ -98,19 +117,26 @@ class RAGTool(BaseTool):
 
         Args:
             directory: Directory containing the saved vector store
-            document_path: Optional path to document (for metadata only)
+            document_path: Optional document path for fallback
 
         Returns:
             Loaded RAGTool instance
         """
-        # Create a minimal instance
-        if document_path:
-            instance = cls(document_path, is_file_path=False)
-        else:
-            instance = cls("", is_file_path=False)
-
-        # Replace the vector store with the loaded one
-        instance.vector_store = VectorStore.load(directory)
-        instance.num_chunks = len(instance.vector_store.documents)
-
-        return instance
+        try:
+            # Try to load from disk
+            vector_store = VectorStore.load(directory)
+            rag_tool = cls.__new__(cls)
+            rag_tool.settings = Settings()
+            rag_tool.processor = DocumentProcessor(
+                chunk_size=400, chunk_overlap=50)
+            rag_tool.vector_store = vector_store
+            rag_tool.cache = RAGCache() if rag_tool.settings.rag_cache_enabled else None
+            rag_tool.num_chunks = len(vector_store.documents)
+            return rag_tool
+        except Exception as e:
+            print(f"Error loading RAG tool from disk: {e}")
+            # Fallback to loading from document
+            if document_path:
+                return cls(document_path)
+            else:
+                raise e
