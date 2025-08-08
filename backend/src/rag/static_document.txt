@@ -8,60 +8,62 @@ Airtel Niger propose des services mobiles complets : appels, SMS, Internet mobil
 ---
 
 🚀 **Forfaits Illimités**
-- 💸 500 FCFA (24H) : Appels illimités Airtel, 10 min tous réseaux, 100 Mo internet – *Code :* *141*2#
-- 💸 1000 FCFA (48H) : Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo – *Code :* *141*2#
-- 💸 3000 FCFA (7jours) : Appels illimités Airtel, 60 min tous réseaux, 2 Go – *Code :* *141*2#
-- 💸 5000 FCFA (7jours) : Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go – *Code :* *141*2#
-- 💸 10000 FCFA (30jours) : 3000 min Airtel, 100 min tous réseaux, SMS illimités Airtel, 4 Go – *Code :* *141*1#
-- 💸 20000 FCFA (30jours) : Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go – *Code :* *141*2#
+- 💸 500 FCFA (24H) : Appels illimités Airtel, 10 min tous réseaux, 100 Mo internet – Activation : *141*2#
+- 💸 1000 FCFA (48H) : Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo – Activation : *141*2#
+- 💸 3000 FCFA (7jours) : Appels illimités Airtel, 60 min tous réseaux, 2 Go – Activation : *141*2#
+- 💸 5000 FCFA (7jours) : Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go – Activation : *141*2#
+- 💸 10000 FCFA (30jours) : 3000 min Airtel, 100 min tous réseaux, SMS illimités Airtel, 4 Go – Activation : *141*1#
+- 💸 20000 FCFA (30jours) : Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go – Activation : *141*2#
 
 ---
 
 🌐 **Forfaits Internet**
 - ⏰ 500 Mo/1h : 200 FCFA
 - ⏰ 1 Go/1h : 350 FCFA
-- 📅 25 Mo/24h : 100 FCFA (+25 Mo bonus lun/mer/ven)
-- 📅 40 Mo/24h : 150 FCFA (+40 Mo bonus lun/mer/ven)
-- 📅 75 Mo/24h : 200 FCFA (+75 Mo bonus lun/mer/ven)
-- 📅 125 Mo/24h : 300 FCFA (+125 Mo bonus lun/mer/ven)
-- 📅 600 Mo/24h : 500 FCFA (+600 Mo bonus lun/mer/ven)
-- 🌙 200 Mo (00h-5h) : 250 FCFA (+200 Mo bonus lun/mer/ven)
-- 🌙 1,2 Go (00h-5h) : 500 FCFA (+1,2 Go bonus lun/mer/ven)
-- 🌙 5 Go (00h-5h) : 1000 FCFA (+5 Go bonus lun/mer/ven)
-- 🌙 10 Go (00h-5h) : 1500 FCFA (+10 Go bonus lun/mer/ven)
-- 📅 400 Mo/7jours : 500 FCFA (+400 Mo bonus 48h lun/mer/ven)
-- 📅 1 Go/7jours : 1000 FCFA (+1 Go bonus 48h lun/mer/ven)
-- 📅 3 Go/7jours : 2000 FCFA (+3 Go bonus 48h lun/mer/ven)
-- 📅 5 Go/7jours : 3000 FCFA (+5 Go bonus 48h lun/mer/ven)
-- 📅 2 Go/30jours : 2000 FCFA (+2 Go bonus 7j lun/mer/ven)
-- 📅 6 Go/30jours : 5000 FCFA (+6 Go bonus 7j lun/mer/ven)
-- 📅 16 Go/30jours : 10000 FCFA (+16 Go bonus 7j lun/mer/ven)
-- 📅 40 Go/30jours : 20000 FCFA (+40 Go bonus 7j lun/mer/ven)
+- 📅 100 FCFA - 25 Mo valable 24h
+- 📅 150 FCFA - 40 Mo valable 24h
+- 📅 200 FCFA - 75 Mo valable 24h
+- 📅 300 FCFA - 125 Mo valable 24h
+- 📅 500 FCFA - 600 Mo valable 24h
+- 🌙 250 FCFA - 200 Mo valable de 00h à 5h
+- 🌙 500 FCFA - 1,2 Go valable de 00h à 5h
+- 🌙 1000 FCFA - 5 Go valable de 00h à 5h
+- 🌙 1500 FCFA - 10 Go valable de 00h à 5h
+- 📅 500 FCFA - 400 Mo valable 7 jours
+- 📅 1000 FCFA - 1 Go valable 7 jours
+- 📅 2000 FCFA - 3 Go valable 7 jours
+- 📅 3000 FCFA - 5 Go valable 7 jours
+- 📅 2000 FCFA - 2 Go valable 30 jours
+- 📅 5000 FCFA - 6 Go valable 30 jours
+- 📅 10000 FCFA - 16 Go valable 30 jours
+- 📅 20000 FCFA - 40 Go valable 30 jours
 
 Activation : *141*3#
 
+🎁 100% de bonus le lundi, mercredi et vendredi valable 48h lors de l'activation des forfaits internet hebdomadaires et 7 jours pour les forfaits mensuels !
+ 
 ---
 
-📞 **Forfaits Voix**
-- 🗣️ 7 min Airtel + 7 min tous réseaux/24h : 50 FCFA – *Code :* *141*1*1#
-- 🗣️ 15 min Airtel + 15 min tous réseaux/24h : 100 FCFA – *Code :* *141*1*1#
-- 🗣️ 32 min Airtel + 32 min tous réseaux/24h : 200 FCFA – *Code :* *141*1*1#
-- 🗣️ 50 min Airtel + 50 min tous réseaux/48h : 300 FCFA – *Code :* *141*1*1#
-- 🗣️ Appels illimités Airtel, 10 min tous réseaux, 100 Mo/24h : 500 FCFA – *Code :* *141*1*1#
-- 🗣️ Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo/48h : 1000 FCFA – *Code :* *141*2*1#
-- 🗣️ 75 min Airtel + 75 min tous réseaux/7jours : 500 FCFA – *Code :* *141*1*3#
-- 🗣️ 200 min Airtel + 200 min tous réseaux/7jours : 1000 FCFA – *Code :* *141*1*3#
-- 🗣️ 250 min Airtel/7jours : 1500 FCFA – *Code :* *141*1*3#
-- 🗣️ 105 min Airtel + 30 min tous réseaux + 500 Mo/7jours : 1500 FCFA – *Code :* *141*1*6#
-- 🗣️ Appels illimités Airtel, 60 min tous réseaux, 2 Go/7jours : 3000 FCFA – *Code :* *141*2*2#
-- 🗣️ Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go/7jours : 5000 FCFA – *Code :* *141*2*2#
-- 🗣️ 320 min Airtel + 30 min tous réseaux + 2 Go/30jours : 5000 FCFA – *Code :* *141*1*6#
-- 🗣️ 1000 min Airtel, SMS illimités Airtel/30jours : 5000 FCFA – *Code :* *141*1*4#
-- 🗣️ 3000 min Airtel + 100 min tous réseaux, SMS illimités Airtel, 4 Go/30jours : 10000 FCFA – *Code :* *141*1*4#
-- 🗣️ Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go/30jours : 20000 FCFA – *Code :* *141*2*3#
-- 🌙 120 min (23h-4h59)/24h : 100 FCFA – *Code :* *141*1*1#
-- 🌙 800 min (23h-4h59)/7jours : 500 FCFA – *Code :* *141*1*1#
-- 🌙 3500 min (23h-4h59)/30jours : 1500 FCFA – *Code :* *141*1*1#
+📞 **Forfaits Appel**
+- 🗣️ 50 FCFA - 7 min Airtel + 7 min tous réseaux/24h – Activation : *141*1*1#
+- 🗣️ 100 FCFA - 15 min Airtel + 15 min tous réseaux/24h – Activation : *141*1*1#
+- 🗣️ 200 FCFA - 32 min Airtel + 32 min tous réseaux/24h – Activation : *141*1*1#
+- 🗣️ 300 FCFA - 50 min Airtel + 50 min tous réseaux/48h – Activation : *141*1*1#
+- 🗣️ 500 FCFA - Appels illimités Airtel, 10 min tous réseaux, 100 Mo/24h – Activation : *141*1*1#
+- 🗣️ 1000 FCFA - Appels illimités Airtel, 20 min tous réseaux, SMS illimités Airtel, 500 Mo/48h – Activation : *141*2*1#
+- 🗣️ 500 FCFA - 75 min Airtel + 75 min tous réseaux/7jours – Activation : *141*1*3#
+- 🗣️ 1000 FCFA - 200 min Airtel + 200 min tous réseaux/7jours – Activation : *141*1*3#
+- 🗣️ 1500 FCFA - 250 min Airtel/7jours – Activation : *141*1*3#
+- 🗣️ 1500 FCFA - 105 min Airtel + 30 min tous réseaux + 500 Mo/7jours – Activation : *141*1*6#
+- 🗣️ 3000 FCFA - Appels illimités Airtel, 60 min tous réseaux, 2 Go/7jours – Activation : *141*2*2#
+- 🗣️ 5000 FCFA - Appels illimités Airtel, 120 min tous réseaux, SMS illimités Airtel, 3 Go/7jours – Activation : *141*2*2#
+- 🗣️ 5000 FCFA - 320 min Airtel + 30 min tous réseaux + 2 Go/30jours – Activation : *141*1*6#
+- 🗣️ 5000 FCFA - 1000 min Airtel, SMS illimités Airtel/30jours – Activation : *141*1*4#
+- 🗣️ 10000 FCFA - 3000 min Airtel + 100 min tous réseaux, SMS illimités Airtel, 4 Go/30jours – Activation : *141*1*4#
+- 🗣️ 20000 FCFA - Appels illimités Airtel, 300 min tous réseaux, SMS illimités Airtel, 12 Go/30jours – Activation : *141*2*3#
+- 🌙 100 FCFA - 120 min (23h-4h59)/24h – Activation : *141*1*1#
+- 🌙 500 FCFA - 800 min (23h-4h59)/7jours – Activation : *141*1*1#
+- 🌙 1500 FCFA - 3500 min (23h-4h59)/30jours – Activation : *141*1*1#
 
 ---
 
