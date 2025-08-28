@@ -77,7 +77,7 @@ export default function Chat() {
 
   // STREAMING FUNCTION - DISABLED BUT CODE PRESERVED FOR FUTURE USE
   // To re-enable streaming, change handleSend() to call handleSendStreaming() instead of handleSendNonStreaming()
-  const handleSendStreaming = async () => {
+  async function handleSendStreaming() {
     if (!input.trim() || !sessionId) return;
     setHasError(null);
     const userMessage: Message = { role: "user", content: input };
@@ -155,7 +155,7 @@ export default function Chat() {
       setIsLoading(false);
       inputRef.current?.focus();
     }
-  };
+  }
 
   // NON-STREAMING FUNCTION - ENABLED BY DEFAULT
   const handleSendNonStreaming = async () => {
