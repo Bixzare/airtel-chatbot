@@ -77,6 +77,7 @@ export default function Chat() {
 
   // STREAMING FUNCTION - DISABLED BUT CODE PRESERVED FOR FUTURE USE
   // To re-enable streaming, change handleSend() to call handleSendStreaming() instead of handleSendNonStreaming()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handleSendStreaming() {
     if (!input.trim() || !sessionId) return;
     setHasError(null);
